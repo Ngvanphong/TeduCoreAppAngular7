@@ -23,9 +23,18 @@
               "src/assets"
             ],
             "styles": [
+              "../node_module/bootstrap/dist/css/bootstrap.min.css",
+              "../node_module/font-awesome/css/font-awesome.min.css",
+              "../node_module/nprogress/nprogress.css",
+              "../src/assets/css/custom.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "../node_modules/jquery/dist/jquery.min.js",
+              "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "../node_modules/fastclick/lib/fastclick.js",
+              "../node_modules/nprogress/nprogress.js"
+            ]
           },
           "configurations": {
             "production": {
