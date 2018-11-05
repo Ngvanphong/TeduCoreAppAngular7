@@ -27,7 +27,9 @@ export class AuthenService {
           (res: any) => {
             if (res.token) {
               localStorage.removeItem(SystemConstant.CURRENT_USER);
+              localStorage.removeItem(SystemConstant.CURRENT_TOKEN)
               localStorage.setItem(SystemConstant.CURRENT_USER,JSON.stringify(res.userLogin));
+              localStorage.setItem(SystemConstant.CURRENT_TOKEN,JSON.stringify(res.token));
               this._utilityService.navigate(UrlConstant.PRODUCT);            
             }
           }
@@ -53,7 +55,8 @@ export class AuthenService {
     let user: LoggedInUser;
     if (this.isUserAuthenticated() == true) {
       var UserData = JSON.parse(localStorage.getItem(SystemConstant.CURRENT_USER));
-      user = new LoggedInUser(UserData.access_token, UserData.username, UserData.fullName,
+      var accessToken=JSON.parse(localStorage.getItem(SystemConstant.CURRENT_TOKEN))
+      user = new LoggedInUser(accessToken, UserData.username, UserData.fullName,
         UserData.email, UserData.avatar, UserData.roles, UserData.permissions);
     }
     else
