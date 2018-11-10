@@ -7,12 +7,7 @@ import { AuthenService } from './authen.service'
 import { tap, catchError } from 'rxjs/operators';
 import {UtilityService} from './utility.service'
 import { Observable } from 'rxjs';
-const _headerOptionData = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-const optionPostFile={
-  headers: new HttpHeaders()
-};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,20 +16,24 @@ export class DataService {
   constructor(private _http: HttpClient, private _notificationService: NotificationService, private _authenService: AuthenService
     , private _utilityService :UtilityService
     ) { }
-
-  get(uri: string) {
-    _headerOptionData.headers.delete("Authorization");
-    _headerOptionData.headers.append("Authorization", "Bearer " + this._authenService.getUserLogin().access_token)
-    return this._http.get(SystemConstant.BASE_API + uri, _headerOptionData).pipe(
+let
+  get(uri: string) { 
+    let reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this._authenService.getUserLogin().access_token
+   });
+    return this._http.get(SystemConstant.BASE_API + uri,{ headers: reqHeader }).pipe(
       tap(),
       catchError(this._notificationService.handleError<any>("is empty"))
     )
   };
 
   getString(uri: string, key: string, id: string) {
-    _headerOptionData.headers.delete("Authorization");
-    _headerOptionData.headers.append("Authorization", "Bearer " + this._authenService.getUserLogin().access_token)
-    return this._http.get(SystemConstant.BASE_API + uri + "/?" + key + "=" + id, _headerOptionData).pipe(
+    let reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this._authenService.getUserLogin().access_token
+   });
+    return this._http.get(SystemConstant.BASE_API + uri + "/?" + key + "=" + id, { headers: reqHeader }).pipe(
       tap(
       ),
       catchError(
@@ -44,9 +43,11 @@ export class DataService {
   };
 
   post(uri: string, data?: any) {
-    _headerOptionData.headers.delete("Authorization");
-    _headerOptionData.headers.append("Authorization", "Bearer " + this._authenService.getUserLogin().access_token)
-    return this._http.post(SystemConstant.BASE_API + uri, data, _headerOptionData).pipe(
+    let reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this._authenService.getUserLogin().access_token
+   });
+    return this._http.post(SystemConstant.BASE_API + uri, data, { headers: reqHeader }).pipe(
       tap(
         (res: any) => {
           this._notificationService.printSuccesMessage(MessageConstant.CREATE_OK_MEG);
@@ -59,9 +60,11 @@ export class DataService {
   };
 
   put(uri: string, data?: any) {
-    _headerOptionData.headers.delete("Authorization");
-    _headerOptionData.headers.append("Authorization", "Bearer " + this._authenService.getUserLogin().access_token)
-    return this._http.put(SystemConstant.BASE_API + uri, data, _headerOptionData).pipe(
+    let reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this._authenService.getUserLogin().access_token
+   });
+    return this._http.put(SystemConstant.BASE_API + uri, data, { headers: reqHeader }).pipe(
       tap(
         (res: any) => {
           this._notificationService.printSuccesMessage(MessageConstant.UPDATE_OK_MEG);
@@ -74,9 +77,11 @@ export class DataService {
   };
 
   delete(uri: string, key: string, id: string) {
-    _headerOptionData.headers.delete("Authorization");
-    _headerOptionData.headers.append("Authorization", "Bearer " + this._authenService.getUserLogin().access_token)
-    return this._http.delete(SystemConstant.BASE_API + uri + "?" + key + "=" + id, _headerOptionData).pipe(
+    let reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this._authenService.getUserLogin().access_token
+   });
+    return this._http.delete(SystemConstant.BASE_API + uri + "?" + key + "=" + id,{ headers: reqHeader }).pipe(
       tap(
         (res: any) => {
           this._notificationService.printSuccesMessage(MessageConstant.DELETE_OK_MEG);
@@ -88,9 +93,11 @@ export class DataService {
     )
   };
   deleteAllTagNotUse(uri: string) {
-    _headerOptionData.headers.delete("Authorization");
-    _headerOptionData.headers.append("Authorization", "Bearer " + this._authenService.getUserLogin().access_token)
-    return this._http.delete(SystemConstant.BASE_API + uri, _headerOptionData).pipe(
+    let reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this._authenService.getUserLogin().access_token
+   });
+    return this._http.delete(SystemConstant.BASE_API + uri, { headers: reqHeader }).pipe(
       tap(
         (res: any) => {
           this._notificationService.printSuccesMessage(MessageConstant.DELETE_OK_MEG);
@@ -102,13 +109,15 @@ export class DataService {
     )
   }
   deleteWithMultiParams(uri: string, params) {
-    _headerOptionData.headers.delete("Authorization");
-    _headerOptionData.headers.append("Authorization", "Bearer " + this._authenService.getUserLogin().access_token)
+    let reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this._authenService.getUserLogin().access_token
+   });
     var paramStr: string = '';
     for (let param in params) {
       paramStr += param + "=" + params[param] + '&';
     }
-    return this._http.delete(SystemConstant.BASE_API + uri + "/?" + paramStr, _headerOptionData).pipe(
+    return this._http.delete(SystemConstant.BASE_API + uri + "/?" + paramStr, { headers: reqHeader }).pipe(
       tap(
         (res: any) => {
           this._notificationService.printSuccesMessage(MessageConstant.DELETE_OK_MEG);
@@ -118,13 +127,12 @@ export class DataService {
         this._notificationService.handleError<any>("Not success")
       )
     )
-
-
   }
   postFile(uri: string, data?: any) {
-    optionPostFile.headers.delete("Authorization");
-    optionPostFile.headers.append("Authorization", "Bearer " + this._authenService.getUserLogin().access_token)    
-    return this._http.post(SystemConstant.BASE_API + uri, data,optionPostFile).pipe(
+    let reqHeader = new HttpHeaders({ 
+      'Authorization': 'Bearer ' + this._authenService.getUserLogin().access_token
+   });    
+    return this._http.post(SystemConstant.BASE_API + uri, data,{ headers: reqHeader }).pipe(
       tap(
         (res: any) => {
           this._notificationService.printSuccesMessage(MessageConstant.CREATE_OK_MEG);

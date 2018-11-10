@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this._authentication.login(this.model.username, this.model.password, this.model.rememberMe).subscribe(data => {     
       this.loading=false;
-      console.log(data);
     });
   }
 

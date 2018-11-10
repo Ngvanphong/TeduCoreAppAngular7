@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import {LoginModule} from './login/login.module';
 import {MainModule} from './main/main.module';
 import {HttpClientModule} from '@angular/common/http'
-import {NotificationService} from '../app/core/service/notification.service'
+import {NotificationService} from '../app/core/service/notification.service';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     HttpClientModule,
