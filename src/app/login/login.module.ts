@@ -5,7 +5,8 @@ import {RouterModule,Routes} from '@angular/router';
 import {AuthenService} from '../core/service/authen.service';
 import {FormsModule} from '@angular/forms'
 const loginRouter:Routes=[
-{path:'',component:LoginComponent}
+{path:'',redirectTo:'index',pathMatch:'full'},
+{path:'index',component:LoginComponent}
 ]
 @NgModule({
   imports: [

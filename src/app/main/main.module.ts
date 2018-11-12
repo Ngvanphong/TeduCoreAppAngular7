@@ -11,6 +11,7 @@ import {TopbarMenuComponent} from '../shared/topbar-menu/topbar-menu.component'
   imports: [
     CommonModule,
     RouterModule.forChild(mainRouter),
+    
   ],
   declarations: [MainComponent,SidebarMenuComponent,TopbarMenuComponent]
 })

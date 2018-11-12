@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FuntionComponent } from './funtion.component';
 import {Routes,RouterModule} from '@angular/router';
 const funtionRouter:Routes=[
-  {path:'',component:FuntionComponent}
+  {path:'',redirectTo:'index',pathMatch:'full'},
+  {path:'index',component:FuntionComponent}
+  
 ]
 
 @NgModule({

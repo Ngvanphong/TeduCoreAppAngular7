@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import {Routes,RouterModule} from '@angular/router';
 const userRouter:Routes=[
-  {path:'',component:UserComponent}
+  {path:'',redirectTo:'index',pathMatch:'full'},
+  {path:'index',component:UserComponent}
 ]
 @NgModule({
   imports: [

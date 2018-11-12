@@ -58,6 +58,8 @@
 /* === Import template variables === */
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 @import '../node_modules/alertifyjs/build/css/alertify.min.css';
@@ -8646,8 +8648,8 @@ pre {
   display: block;
   width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar; }
+ -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar; } 
   .table-responsive > .table-bordered {
     border: 0; }
 
@@ -9014,7 +9016,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   vertical-align: middle;
   user-select: none;
   border: 1px solid transparent;
-  padding: 0.56rem 1.375rem;
+  padding: 0.56rem 0.8rem;
   font-size: 1rem;
   line-height: 1;
   border-radius: 0.1875rem;
@@ -14305,8 +14307,8 @@ pre {
 
 .img-xs, .table td img,
 .table th img {
-  width: 37px;
-  height: 37px; }
+  width: 90px;
+  height: 90px; }
 
 .img-ss {
   width: 26px;

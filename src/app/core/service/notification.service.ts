@@ -67,9 +67,10 @@ export class NotificationService {
     this._notify.error(message);
   };
 
- public handleError<T> (message:string, result?: T) {
-    return (error: any): Observable<T> => {  
-    this.printErrorMessage(message);
+  public handleError<T>(message: string, result?: T) {
+    return (error: any): Observable<T> => {
+      console.log(error);
+      this.printErrorMessage(message);
       return of(result as T);
     };
   }
