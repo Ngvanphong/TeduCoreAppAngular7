@@ -58,7 +58,10 @@
 /* === Import template variables === */
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
-@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+
+
+/* @import '../node_modules/bootstrap/dist/css/bootstrap.min.css'; */
 
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 
@@ -7619,7 +7622,8 @@ textarea {
 
 button,
 input {
-  overflow: visible; }
+  overflow: visible;
+   }
 
 button,
 select {
@@ -8648,6 +8652,7 @@ pre {
   display: block;
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
  -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar; } 
   .table-responsive > .table-bordered {
@@ -11114,7 +11119,7 @@ button.close {
   .modal-dialog-centered {
     min-height: calc(100% - (30px * 2)); }
   .modal-sm {
-    max-width: 300px; } }
+    max-width: 1000px; } }
 
 @media (min-width: 992px) {
   .modal-lg {
@@ -15686,10 +15691,9 @@ pre {
 .form-control {
   border: 1px solid #f2f2f2;
   font-family: "Poppins", sans-serif;
-  font-size: 0.75rem;
   padding: 0.56rem 0.75rem;
-  line-height: 14px;
-  font-weight: 300; }
+  font-size:13px;
+  font-weight: 400; }
   .form-control.form-control-lg, .input-group-lg > .form-control,
   .input-group-lg > .input-group-prepend > .form-control.input-group-text,
   .input-group-lg > .input-group-append > .form-control.input-group-text,
@@ -15704,7 +15708,8 @@ pre {
     padding: 0.25rem 0.75rem; }
 
 select.form-control {
-  padding: 0.4375rem 0.75rem; }
+  padding: 0.4375rem 0.75rem;
+  cursor: pointer }
 
 .form-group label {
   font-size: 13px;

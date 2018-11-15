@@ -4,6 +4,9 @@ import { ProductComponent } from './product.component';
 import {Routes,RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import{TinyMceModule} from '../../shared/tiny-mce/tiny-mce.module'
 const productRouter:Routes=[
   {path:'',redirectTo:'index', pathMatch:'full'},
   {path:'index',component:ProductComponent}
@@ -13,7 +16,10 @@ const productRouter:Routes=[
     CommonModule,
     RouterModule.forChild(productRouter),
     FormsModule,
+    ModalModule.forRoot(),
     PaginationModule.forRoot(),
+    EditorModule,
+    TinyMceModule,
   ],
   declarations: [ProductComponent]
 })

@@ -24,7 +24,7 @@ let
    });
     return this._http.get(SystemConstant.BASE_API + uri,{ headers: reqHeader }).pipe(
       tap(),
-      catchError(this._notificationService.handleError<any>("is empty"))
+      catchError(this._notificationService.handleError<any>("error"))
     )
   };
 
@@ -92,6 +92,7 @@ let
       )
     )
   };
+
   deleteAllTagNotUse(uri: string) {
     let reqHeader = new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -107,7 +108,8 @@ let
         this._notificationService.handleError<any>("Not success")
       )
     )
-  }
+  };
+
   deleteWithMultiParams(uri: string, params) {
     let reqHeader = new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -127,22 +129,20 @@ let
         this._notificationService.handleError<any>("Not success")
       )
     )
-  }
+  };
+
   postFile(uri: string, data?: any) {
     let reqHeader = new HttpHeaders({ 
       'Authorization': 'Bearer ' + this._authenService.getUserLogin().access_token
    });    
     return this._http.post(SystemConstant.BASE_API + uri, data,{ headers: reqHeader }).pipe(
-      tap(
-        (res: any) => {
-          this._notificationService.printSuccesMessage(MessageConstant.CREATE_OK_MEG);
-        }
+      tap(    
       ),
       catchError(
         this._notificationService.handleError<any>("Not success")
       )
     )
-  }
+  };
   
   public handleErrorComponent(error: any) {
     if (error.status == 401) {
@@ -160,9 +160,8 @@ let
       this._notificationService.printErrorMessage(errMsg);
       return Observable.throw(errMsg);
     }
-
-
-  }
+  };
+  
 
 
 }
