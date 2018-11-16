@@ -40,7 +40,9 @@ export class ProductComponent implements OnInit {
   public quantityEntity: any = {};
   public productQuantities: any[];
   public sizeId: number = null;
+  public colorId: number = null;
   public sizes: any[];
+  public colors:any[];
 
   constructor(private _utilityService: UtilityService,private _dataService:DataService,
     private _notificationService:NotificationService,private _uploadService:UploadService) { }
@@ -220,6 +222,78 @@ export class ProductComponent implements OnInit {
     }
     this._dataService.put('/api/productImage/update', JSON.stringify(this.image)).subscribe((res) => {
     });
+
+  }
+
+   /*Quantity management */
+
+   private loadSizes() {
+    this._dataService.get('/api/productQuantity/getsizes').subscribe((res) => {
+      this.sizes = res;
+    });
+  }
+  private loadColors() {
+    this._dataService.get('/api/productQuantity/getcolors').subscribe((res) => {
+      this.colors = res;
+    });
+  }
+
+  private loadProductQuatity(id: any) {
+    this._dataService.get('/api/productQuantity/getall?productId=' + id).subscribe((res) => {
+      this.productQuantities = res;
+    });
+  }
+
+  public showQuantityManage(productId: any) {
+    this.quantityEntity = {
+      ProductId: productId,
+    }
+    this.loadColors();
+    this.loadSizes();
+    this.loadProductQuatity(productId);
+    this.quantityManageModal.show();
+  }
+
+  public saveProductQuantity(forms:NgForm) {
+    this._dataService.post('/api/productQuantity/add', JSON.stringify(this.quantityEntity)).subscribe(res => {
+      if(res!=null){
+        this.loadProductQuatity(this.quantityEntity.ProductId);
+        this.quantityEntity = {
+          ProductId: this.quantityEntity.ProductId,
+        };
+        forms.resetForm(); 
+      }    
+    });
+  }
+
+  public deleteQuantity(productId: any, sizeId: any,colorId:any) {
+    let prama: any = {
+      "productId": productId, "sizeId": sizeId,"colorId": colorId
+    }
+    this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => {
+      this._dataService.deleteWithMultiParams('/api/productQuantity/delete', prama).subscribe((res) => {
+        if(res!=null){
+          this.loadProductQuatity(productId);
+        }     
+      });
+    })
+  }
+
+  /* Create API update quatity for product*/
+  public items: any = {}
+
+  public updateQuantity(productId: any, sizeId: number,colorId:number, count: any) {
+    let prama: any = {
+      "productId": productId, "sizeId": sizeId,"colorId":colorId
+    }
+    for (let item of this.productQuantities) {
+      if (item.SizeId == sizeId&&item.ColorId==colorId) {
+        this.items = item;
+        this.items.Quantity = Number.parseInt(count);
+      };
+    }
+    this._dataService.put('/api/productQuantity/update', JSON.stringify(this.items)).subscribe((res) => {   
+    })
 
   }
 
