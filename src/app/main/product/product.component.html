@@ -21,8 +21,8 @@
       placeholder="Tìm kiếm...">
   </div>
   <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-    <button class="btn btn-primary" type="button" (click)="search()">Tìm</button>
-    <button class="btn btn-default" type="button" (click)="reset()">Reset</button>
+    <button class="btn btn-primary mr-2" type="button" (click)="search()">Tìm</button>
+    <button class="btn btn-default mr-2" type="button" (click)="reset()">Reset</button>
     <button class="btn btn-danger" type="button" (click)="deleteMulti()">Xóa</button>
   </div>
 </div>
@@ -62,17 +62,17 @@
                 </td>
                 <td>{{item.DateCreated | date}}</td>
                 <td>
-                  <button class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Quản lý ảnh"
+                  <button class="btn btn-default mr-2" data-toggle="tooltip" data-placement="top" title="Quản lý ảnh"
                     (click)="showImageManage(item.Id)">
                     <i class="fa fa-file-image-o" aria-hidden="true"></i>
                   </button>
 
-                  <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Quản lý số lượng"
+                  <button class="btn btn-primary mr-2" data-toggle="tooltip" data-placement="top" title="Quản lý số lượng"
                     (click)="showQuantityManage(item.Id)">
                     <i class="fa fa-bandcamp" aria-hidden="true"></i>
                   </button>
 
-                  <button class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Cập nhật sản phẩm"
+                  <button class="btn btn-default mr-2" data-toggle="tooltip" data-placement="top" title="Cập nhật sản phẩm"
                     (click)="showEdit(item.Id)">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   </button>
@@ -249,7 +249,7 @@
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
-              <button type="button" (click)="addEditModal.hide()" class="btn btn-danger">Hủy bỏ</button>
+              <button type="button" (click)="addEditModal.hide()" class="btn btn-danger mr-2">Hủy bỏ</button>
               <button type="submit" class="btn btn-success" [disabled]="!addEditForm.form.valid">Cập nhật</button>
             </div>
           </div>
@@ -313,7 +313,7 @@
                   type="text">
               </td>
               <td>
-                <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa ảnh" (click)="deleteImage(image.Id)">
+                <button class="btn btn-danger mr-2" data-toggle="tooltip" data-placement="top" title="Xóa ảnh" (click)="deleteImage(image.Id)">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
                 <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật ảnh" (click)="updateImage(image.Id,caption.value)">
@@ -402,7 +402,7 @@
               <input #quatityProductid class="form-control  mt-18 nolinebox" [(ngModel)]="item.Quantity" name="quatityProductid"
                 type="text">
               <td>
-                <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa số lượng" (click)="deleteQuantity(item.ProductId,item.SizeId,item.ColorId)">
+                <button class="btn btn-danger mr-2" data-toggle="tooltip" data-placement="top" title="Xóa số lượng" (click)="deleteQuantity(item.ProductId,item.SizeId,item.ColorId)">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
                 <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật số lượng"

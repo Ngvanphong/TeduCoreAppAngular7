@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
     "alertifyjs": "^1.11.2",
+    "angular-tree-component": "^8.0.0",
     "animate": "^1.0.0",
     "animate.min.css": "0.0.3",
     "bootstrap": "^4.1.3",

@@ -8,7 +8,8 @@ export const mainRouter:Routes=[
     {path:'post',loadChildren:'./post/post.module#PostModule'},
     {path:'role',loadChildren:'./role/role.module#RoleModule'},
     {path:'user',loadChildren:'./user/user.module#UserModule'},
-    {path:'product',loadChildren:'./product/product.module#ProductModule'},    
+    {path:'product',loadChildren:'./product/product.module#ProductModule'},
+    {path:'productcategory',loadChildren:'./product-category/product-category.module#ProductCategoryModule'},    
 ]},
 
 ]
