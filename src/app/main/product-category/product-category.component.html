@@ -4,7 +4,7 @@
     </h3>
   </div>
   <div class="col-md-3 col-sm-6 col-xs-12 form-group ">
-    <input type="text" name="filter" [(ngModel)]="filterKeyword" (keyup.enter)="search()" class="form-control"
+    <input type="text" name="filter" [(ngModel)]="filter" (keyup.enter)="search()" class="form-control"
       placeholder="Tìm kiếm...">
   </div>
 </div>
@@ -31,7 +31,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal form-label-left input_mask" novalidate #addEditForm="ngForm" (ngSubmit)="saveChanges(addEditForm.valid)"
+        <form class="form-horizontal form-label-left input_mask" novalidate #addEditForm="ngForm" (ngSubmit)="saveChanges(addEditForm)"
           *ngIf="entity">
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên</label>
@@ -46,7 +46,7 @@
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Alias</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
-              <input type="text" #alias="ngModel" [(ngModel)]="entity.Alias" required minlength="3" name="alias" class="form-control" />
+              <input type="text" #alias="ngModel" [(ngModel)]="entity.SeoAlias" required minlength="3" name="alias" class="form-control" />
               <small [hidden]="alias.valid || (alias.pristine && !addEditForm.submitted)" class="text-danger">
                 Bạn phải nhập alias
               </small>
@@ -60,7 +60,7 @@
               <input type="hidden" [(ngModel)]="entity.Image" name="imageUrl" />
             </div>
             <div class="col-md-2 col-sm-2 col-xs-12" *ngIf="entity.Image">
-              <img [src]="BaseUrlImage + entity.Image" width="128" />
+              <img [src]="baseFolder + entity.Image" width="90" />
             </div>
           </div>
           <div class="form-group row">
@@ -72,7 +72,7 @@
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Thứ tự</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
-              <input type="number" #displayOrder="ngModel" [(ngModel)]="entity.DisplayOrder" required name="displayOrder" class="form-control"
+              <input type="number" #displayOrder="ngModel" [(ngModel)]="entity.SortOrder" required name="displayOrder" class="form-control"
               />
               <small [hidden]="displayOrder.valid || (displayOrder.pristine && !addEditForm.submitted)" class="text-danger">
                 Bạn phải nhập thứ tự
@@ -102,6 +102,12 @@
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Từ khóa</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
               <input type="text" #seoKeywords="ngModel" [(ngModel)]="entity.SeoKeywords" name="keyword" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Seo title</label>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <input type="text" #seoPageTitle="ngModel" [(ngModel)]="entity.SeoPageTitle" name="seoPageTitle" class="form-control" />
             </div>
           </div>
           <div class="form-group row">
