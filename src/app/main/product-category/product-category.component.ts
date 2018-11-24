@@ -77,11 +77,8 @@ export class ProductCategoryComponent implements OnInit {
       let fi = this.image.nativeElement;
       if (fi.files.length > 0) {
         this._uploadService.postWithFile('/api/upload/saveImage?type=product', null, fi.files).then((imageUrl) => {
-          if (imageUrl != null) {
-            this.entity.Image = imageUrl;
-            this.saveChangesData(forms);
-          }
-        })
+            this.entity.Image = imageUrl;         
+        }).then(()=> this.saveChangesData(forms));
       }
       else {
         this.saveChangesData(forms);

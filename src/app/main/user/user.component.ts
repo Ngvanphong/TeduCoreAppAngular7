@@ -2,6 +2,11 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import {ModalDirective} from 'ngx-bootstrap';
 import {SystemConstant} from '../../core/common/system.constant';
 import {DataService} from '../../core/service/data.service';
+import {NgForm} from '@angular/forms';
+import {UploadService} from '../../core/service/upload.service';
+import {NotificationService} from '../../core/service/notification.service';
+import {MessageConstant} from '../../core/common/message.constant';
+
 declare var  moment:any;
 @Component({
   selector: 'app-user',
@@ -18,18 +23,31 @@ export class UserComponent implements OnInit {
   public totalRow: number;
   public entity: any;
   public users: any;
-  public allRoles:any[];
-  public myRoles:any[];
   public roles:any[];
   public baseFolder:string=SystemConstant.BASE_API;
 
-  constructor(private _dataService:DataService) { }
+  //dropdown multi
+  public dropdownList = [];
+  public selectedItems = [];
+  public dropdownSettings = {};
+
+  constructor(private _dataService:DataService, private _uploadService:UploadService, private _notificationService:NotificationService) { }
 
   ngOnInit() {
-    this.load();
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+    this.search();
+    this.loadRole();
   }
 
-  public load() {
+  public search() {
     this._dataService.get('/api/appUser/getlistpaging?page=' + this.pageIndex + '&pageSize=' + this.pageSize + '&filter=' + this.filter)
       .subscribe((res: any) => {
         this.users = res.Items;
@@ -37,6 +55,104 @@ export class UserComponent implements OnInit {
         this.pageSize = res.PageSize;
         this.totalRow = res.TotalRows;
       })
+  }
+
+  pageChanged(event: any): void {
+    this.pageIndex= event.page;
+    this.search();
+  }
+
+  public selectStatus(event:any){
+    this.entity.Status=event.target.value;
+  }
+
+  public selectGender(event){
+    this.entity.Gender=event.target.value;
+  }
+
+  private loadRole(){
+    this._dataService.get("/api/appRole/getlistall").subscribe(data=>{
+      this.roles=data;
+      this.dropdownList=[];
+      for(let role of this.roles){      
+        this.dropdownList.push({item_id:role.Name,item_text:role.Name});
+      }
+    })
+  }
+
+  showAdd() {
+    this.selectedItems=[];
+    this.addEditModal.show();
+    this.entity = {Status:true};
+  }
+
+  editUserModal(id: any) {
+    this.loadUser(id);
+    this.addEditModal.show();
+  };
+
+  private loadUser(id: any) {
+    this.entity={};
+    this._dataService.get('/api/appUser/detail/' + id)
+      .subscribe((res: any) => {
+        this.entity = res;
+        this.selectedItems=[];
+        this.entity.BirthDay=moment(this.entity.BirthDay).format('MM/DD/YYYY');
+        for(let role of this.entity.Roles){
+          this.selectedItems.push(role);
+        }; 
+      })
+  }
+
+  deleteUser(id: any) {
+    this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => this.deleteConfirm(id))
+  }
+
+  private deleteConfirm(id: any) {
+    this._dataService.delete("/api/appUser/delete", "id", id).subscribe((res: Response) => {   
+      this.search();
+    })
+  }
+
+  saveChange(form:NgForm) {
+    if (form.valid) {
+      this.entity.Roles=this.selectedItems;  
+      let fi=this.avatar.nativeElement;
+      if(fi.files.length>0){
+        this._uploadService.postWithFile("/api/upload/saveImage?type=avatar", null, fi.files)
+        .then((imageUrl:string)=>{
+            this.entity.Avatar=imageUrl;
+        }).then(()=>{
+          this.saveData(form);
+        });
+      }
+      else{
+        this.saveData(form);
+      }
+    }
+  }
+
+  private saveData(form:NgForm){
+    if (this.entity.Id == undefined) {
+      this._dataService.post("/api/appUser/add", JSON.stringify(this.entity)).subscribe((res: any) => {
+        if(res!=null){
+          this.search();
+          this.addEditModal.hide();
+          form.resetForm();
+          this.avatar.nativeElement.value=''; 
+        }          
+       } )
+    }
+    else {
+      this._dataService.put("/api/appUser/update", JSON.stringify(this.entity)).subscribe((res: any) => {
+        if(res!=null){
+          this.search();
+          this.addEditModal.hide();
+          form.resetForm();
+          this.avatar.nativeElement.value='';
+        }   
+      })
+    }
   }
 
 }

@@ -4,6 +4,9 @@ import { UserComponent } from './user.component';
 import {Routes,RouterModule} from '@angular/router';
 import { PaginationModule } from 'ngx-bootstrap';
 import {FormsModule} from '@angular/forms';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap';
+import {ModalModule} from 'ngx-bootstrap'
 
 const userRouter:Routes=[
   {path:'',redirectTo:'index',pathMatch:'full'},
@@ -13,8 +16,12 @@ const userRouter:Routes=[
   imports: [
     CommonModule,
     FormsModule,
+    ModalModule.forRoot(),
     RouterModule.forChild(userRouter),
     PaginationModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+
   ],
   declarations: [UserComponent]
 })
