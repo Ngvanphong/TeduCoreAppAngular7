@@ -34,7 +34,7 @@
       </a>
       <div class="collapse" id="{{item.Id}}">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item" *ngFor="let subItem of item.ChildFunctions">
+          <li class="nav-item" *ngFor="let subItem of item.ChildFunctions"> 
             <a class="nav-link" routerLink="{{subItem.URL}}" routerLinkActive="active">
               <i class="fa {{subItem.IconCss}}"></i>
               <span class="menu-title">{{subItem.Name}}</span>

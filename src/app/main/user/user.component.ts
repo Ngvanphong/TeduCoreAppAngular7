@@ -62,14 +62,6 @@ export class UserComponent implements OnInit {
     this.search();
   }
 
-  public selectStatus(event:any){
-    this.entity.Status=event.target.value;
-  }
-
-  public selectGender(event){
-    this.entity.Gender=event.target.value;
-  }
-
   private loadRole(){
     this._dataService.get("/api/appRole/getlistall").subscribe(data=>{
       this.roles=data;
