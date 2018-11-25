@@ -1,8 +1,10 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import {ModalDirective} from 'ngx-bootstrap';
-import {DataService} from '../../core/service/data.service';
-import {UtilityService} from '../../core/service/utility.service';
-import {NgForm} from '@angular/forms'
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap';
+import { DataService } from '../../core/service/data.service';
+import { UtilityService } from '../../core/service/utility.service';
+import { NgForm } from '@angular/forms';
+import { NotificationService } from '../../core/service/notification.service';
+import { MessageConstant } from '../../core/common/message.constant';
 
 @Component({
   selector: 'app-funtion',
@@ -10,17 +12,17 @@ import {NgForm} from '@angular/forms'
   styleUrls: ['./funtion.component.css']
 })
 export class FuntionComponent implements OnInit {
-  @ViewChild('addEditModal') private addEditModal:ModalDirective;
-  @ViewChild('permissionModal') private permissionModal:ModalDirective;
+  @ViewChild('addEditModal') private addEditModal: ModalDirective;
+  @ViewChild('permissionModal') private permissionModal: ModalDirective;
   public _functions: any[];
   public _functionHierachy: any[];
   public filter: string = '';
-  public entity:any;
-  public editFlag:boolean;
-  public _permission:any[];
-  public functionId : string;
+  public entity: any;
+  public editFlag: boolean;
+  public _permission: any[];
+  public functionId: string;
 
-  constructor(private _dataService:DataService,private _utilityService:UtilityService) { }
+  constructor(private _dataService: DataService, private _utilityService: UtilityService, private _notificationService: NotificationService) { }
 
   ngOnInit() {
     this.search();
@@ -34,68 +36,77 @@ export class FuntionComponent implements OnInit {
       });
   };
 
-  public showAdd(){
-    this.entity={Status:true};
+  public showAdd() {
+    this.entity = { Status: true };
     this.addEditModal.show();
-   this.editFlag=false;
+    this.editFlag = false;
   }
 
   public showEdit(id: string) {
-    this.entity={};
-    this._dataService.get("/api/function/detail/"+id).subscribe((res:any)=>{
-      if(res!=undefined){
-        this.entity=res;
-        this.editFlag=true;
+    this.entity = {};
+    this._dataService.get("/api/function/detail/" + id).subscribe((res: any) => {
+      if (res != undefined) {
+        this.entity = res;
+        this.editFlag = true;
         this.addEditModal.show();
-      }   
+      }
     })
   };
 
-  public showPermission(id:any){
-    this.functionId =id
-    this._dataService.get("/api/function/getAllPermission?functionId="+id).subscribe((res:any[])=>{
-      if(res!=undefined){
-        this._permission=res;
+  public showPermission(id: any) {
+    this.functionId = id
+    this._dataService.get("/api/function/getAllPermission?functionId=" + id).subscribe((res: any[]) => {
+      if (res != undefined) {
+        this._permission = res;
         this.permissionModal.show();
-      }   
+      }
     })
- }
+  }
 
- public savePermission(valid: boolean, _permission: any[]) {
-  if (valid) {
-    var data = {
-      Permissions: this._permission,
-      FunctionId: this.functionId
+  public savePermission(valid: boolean, _permission: any[]) {
+    if (valid) {
+      var data = {
+        Permissions: this._permission,
+        FunctionId: this.functionId
+      }
+      this._dataService.post('/api/function/savePermission', JSON.stringify(data)).subscribe((res: any) => {
+        if (res != undefined) {
+          this.permissionModal.hide();
+        }
+      });
     }
-    this._dataService.post('/api/function/savePermission', JSON.stringify(data)).subscribe((res: any) => {
-      if(res!=undefined){
-        this.permissionModal.hide();
-      }   
+  }
+
+  private deleteConfirm(id: any) {
+    this._dataService.delete("/api/function/delete", 'id', id).subscribe((res: any) => {
+      this.search();
     });
   }
-}
+  public delete(id: any) {
+    this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => this.deleteConfirm(id))
+  }
 
-  public saveChanges(form:NgForm){
-    if(form.valid){
-      if(this.editFlag){
-        this._dataService.put("/api/function/update",JSON.stringify(this.entity)).subscribe(res=>{
-          if(res!=undefined){
-            this.addEditModal.hide();        
+  public saveChanges(form: NgForm) {
+    if (form.valid) {
+      if (this.editFlag) {
+        this._dataService.put("/api/function/update", JSON.stringify(this.entity)).subscribe(res => {
+          if (res != undefined) {
+            this.addEditModal.hide();
             this.search();
             form.resetForm();
-          }         
+          }
         })
       }
-      else{
-        this._dataService.post("/api/function/add",JSON.stringify(this.entity)).subscribe(res=>{
-          if(res!=undefined){
-            this.addEditModal.hide();         
+      else {
+        this._dataService.post("/api/function/add", JSON.stringify(this.entity)).subscribe(res => {
+          if (res != undefined) {
+            this.addEditModal.hide();
             this.search();
             form.resetForm();
-          }       
+          }
         })
       }
     }
- }
+  }
 
 }
