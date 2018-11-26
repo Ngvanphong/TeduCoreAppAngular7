@@ -50,11 +50,6 @@
             </tbody>
           </table>
         </div>
-        <div *ngIf="users && users.length == 0" class="col-md-12">
-          <div class="alert alert-info">
-            <strong>Thông báo!</strong> Hiện tại chưa có sản phẩm nào trong hệ thống
-          </div>
-        </div>
         <div class="row" *ngIf="users && users.length > 0">
           <div class="col-xs-12 col-12">
             <pagination [totalItems]="totalRow" [itemsPerPage]="pageSize" [maxSize]="pageDisplay" [(ngModel)]="pageIndex"

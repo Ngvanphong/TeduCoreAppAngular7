@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import {Router} from '@angular/router';
+import {UrlConstant} from '../common/url.constant' ;
 declare var alertify: any;
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,7 @@ declare var alertify: any;
 export class NotificationService {
 
   private _notify: any = alertify;
-  constructor() {
+  constructor(private _router:Router) {
     alertify.defaults = {
       // dialogs defaults
       autoReset: true,
@@ -69,8 +71,10 @@ export class NotificationService {
 
   public handleError<T>(message: string, result?: T) {
     return (error: any): Observable<T> => {
-      console.log(error);
       this.printErrorMessage(message);
+      if(error.error=="Forbidden") {
+       this._router.navigate([UrlConstant.lOGIN])
+      }
       return of(result as T);
     };
   }
