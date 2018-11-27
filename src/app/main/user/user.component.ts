@@ -6,6 +6,8 @@ import {NgForm} from '@angular/forms';
 import {UploadService} from '../../core/service/upload.service';
 import {NotificationService} from '../../core/service/notification.service';
 import {MessageConstant} from '../../core/common/message.constant';
+import {AuthenService} from '../../core/service/authen.service';
+import {UtilityService} from '../../core/service/utility.service';
 
 declare var  moment:any;
 @Component({
@@ -31,9 +33,10 @@ export class UserComponent implements OnInit {
   public selectedItems = [];
   public dropdownSettings = {};
 
-  constructor(private _dataService:DataService, private _uploadService:UploadService, private _notificationService:NotificationService) { }
+  constructor(private _dataService:DataService, private _uploadService:UploadService, private _notificationService:NotificationService
+    ,public _authenService:AuthenService,private _utilityService:UtilityService) { }
 
-  ngOnInit() {
+  ngOnInit() {   
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id',
