@@ -226,9 +226,15 @@
                 </div>
               </div>
               <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Seo title</label>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <input type="text" #seoPageTitle="ngModel" [(ngModel)]="entity.SeoPageTitle" name="seoPageTitle" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Từ khóa</label>
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                  <input type="text" #seoKeywords="ngModel" [(ngModel)]="entity.SeoKeywords" name="keyword" class="form-control" />
+                  <input type="text" #seoKeywords="ngModel" [(ngModel)]="entity.SeoKeywords" name="seoKeywords" class="form-control" />
                 </div>
               </div>
               <div class="form-group">

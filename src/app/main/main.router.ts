@@ -6,6 +6,7 @@ export const mainRouter:Routes=[
     {path:'home',loadChildren:'./home/home.module#HomeModule'},
     {path:'function',loadChildren:'./funtion/funtion.module#FuntionModule'},
     {path:'post',loadChildren:'./post/post.module#PostModule'},
+    {path:'post-add',loadChildren:'./post-add/post-add.module#PostAddModule'},
     {path:'role',loadChildren:'./role/role.module#RoleModule'},
     {path:'user',loadChildren:'./user/user.module#UserModule'},
     {path:'product',loadChildren:'./product/product.module#ProductModule'},

@@ -1,0 +1,21 @@
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PostAddComponent } from './post-add.component';
+import{TinyMceModule} from '../../shared/tiny-mce/tiny-mce.module';
+import {FormsModule} from '@angular/forms';
+import {Routes,RouterModule} from '@angular/router';
+const postAddRouter:Routes=[
+  {path:'',redirectTo:'index',pathMatch:'full'},
+  {path:'index',component:PostAddComponent}
+]
+@NgModule({
+  imports: [
+    CommonModule,
+    TinyMceModule,
+    FormsModule,
+    RouterModule.forChild(postAddRouter),
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [PostAddComponent]
+})
+export class PostAddModule { }
