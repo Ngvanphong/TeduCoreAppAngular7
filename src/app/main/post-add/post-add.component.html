@@ -11,10 +11,24 @@
         <app-simple-tiny [elementId]="'my-editor-id'" [content]="this.entity.Content" (onEditorKeyup)="keyupHandlerContentFunction($event)">
         </app-simple-tiny>          
       </div>
-      <div class="form-group">
-        <button class="btn btn-danger btn-fw mr-2" (click)="updateContent()">Hủy bỏ</button>  
+      <div class="form-group row mlf-30">
+        <button class="btn btn-danger btn-fw mr-2" (click)="goBack()">Quay lại</button>  
         <button class="btn btn-success btn-fw mr-2" (click)="updateContent()">Cập nhật</button>     
-        <button  class="btn btn-primary"(click)="showImageManage()">Quản lý ảnh</button>
+        <button  class="btn btn-primary mr-2"(click)="showImageManage()">Quản lý ảnh</button> 
+        <div class="mt-20">
+          <label class="mr-2">
+            <input type="checkbox" [(ngModel)]="entity.Status" [name]="Status" name="status" [ngModelOptions]="{standalone: true}"><strong> ĐĂNG BÀI VIẾT </strong>
+          </label>
+          <label class="mr-2">
+            <input type="checkbox" [(ngModel)]="entity.HomeFlag" [name]="HomeFlag" name="homeFlag" [ngModelOptions]="{standalone: true}"><strong> HIỆN THỊ TRANG CHỦ</strong>
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="entity.HotFlag" [name]="HotFlag" name="hotFlag" [ngModelOptions]="{standalone: true}"><strong> BÀI VIẾT NỔI BẬT</strong>
+          </label>
+        </div>
+      </div>
+      <div >
+       
       </div>
     </div>
   </div>

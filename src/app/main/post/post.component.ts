@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {ModalDirective} from 'ngx-bootstrap';
 import {NgForm} from '@angular/forms';
 import {UploadService} from '../../core/service/upload.service';
+import {UtilityService} from '../../core/service/utility.service';
 
 @Component({
   selector: 'app-post',
@@ -19,16 +20,17 @@ export class PostComponent implements OnInit {
   public totalRow: number;
   public pageIndex: number = 1;
   public pageSize: number = 10;
-  public pageDisplay: number = 10;
+  public pageDisplay: number = 7;
   public posts: any[]=[];
   public filter:string='';
   public entity:any;
+
 
   @ViewChild('addEditModal') private addEditModal: ModalDirective;
   @ViewChild('image') private image;
 
   constructor(private _dataService:DataService,private _notificationService:NotificationService,
-     private _router:Router,private _uploadService:UploadService) { }
+     private _router:Router,private _uploadService:UploadService,private _utilityService:UtilityService) { }
 
   ngOnInit() {
     this.search();
@@ -43,11 +45,22 @@ export class PostComponent implements OnInit {
     this.entity.Content = e;
   }
 
-   // show add
+  public createAlias(name: any) {
+    this.entity.SeoAlias = this._utilityService.MakeSeoTitle(name);
+  }
+
+
    public showAdd() {
     this.entity = { Status: false};
     this.addEditModal.show();
 
+  }
+
+  showEdit(id:string){
+    this._dataService.get('/api/post/detail/' + id).subscribe((response: any) => {
+      this.entity = response;      
+      this.addEditModal.show();
+    });
   }
 
   public search() {

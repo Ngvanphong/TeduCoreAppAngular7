@@ -6,7 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {Routes,RouterModule} from '@angular/router';
 const postAddRouter:Routes=[
   {path:'',redirectTo:'index',pathMatch:'full'},
-  {path:'index',component:PostAddComponent}
+  {path:'index/:id',component:PostAddComponent}
 ]
 @NgModule({
   imports: [

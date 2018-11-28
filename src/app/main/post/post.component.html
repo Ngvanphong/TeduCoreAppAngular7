@@ -15,7 +15,7 @@
           mới</button>
       </div>
       <div class="card-body">
-        <div class="table-responsive" *ngIf="users && users.length > 0">
+        <div class="table-responsive" *ngIf="posts && posts.length > 0">
           <table class="table table-striped">
             <tr>
               <th>Tên bài viết</th>
@@ -28,8 +28,8 @@
             <tbody>
               <tr *ngFor="let item of posts">
                 <td>{{item.Name}}</td>
-                <td>{{item.HomeFlag}}</td>
-                <td>{{item.HotFlag}}</td>
+                <td>{{item.HomeFlag?"bật":"tắt"}}</td>
+                <td>{{item.HotFlag?"bật":"tắt"}}</td>
                 <td *ngIf="item.Status==0"><i class="fa fa-exclamation-triangle"></i>Bị khóa</td>
                 <td *ngIf="item.Status==1"><i class="fa fa-check-square-o"></i>Kích hoạt</td>
                 <td class="py-1">
@@ -51,6 +51,11 @@
               </tr>
             </tbody>
           </table>
+        </div>
+        <div *ngIf="posts && posts.length == 0" class="col-md-12">
+          <div class="alert alert-info">
+            <strong>Thông báo!</strong> Hiện tại chưa có bài viết nào trong hệ thống
+          </div>
         </div>
         <div class="row" *ngIf="posts && posts.length > 0">
           <div class="col-xs-12 col-12">
@@ -97,23 +102,22 @@
               </small>
             </div>
           </div>
-
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Mô tả bài viết</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
-              <input type="text" #description="ngModel" [(ngModel)]="entity.Description" required name="description"
-                class="form-control">
+              <textarea type="text"  #description="ngModel" rows=4 [(ngModel)]="entity.Description" name="description"
+                class="form-control"></textarea>
             </div>
-          </div>
+          </div>         
           <div class="form-group row">
-            <label class="control-label col-md-2 col-sm-2 col-xs-12">Image</label>
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Hình ảnh</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="file" #image name="image" class="form-control">
               <p class="help-block label label-danger"> chỉ hỗ trợ định dạng *.png, *.jpg, *.jpeg </p>
               <input type="hidden" [(ngModel)]="entity.Image" name="imageUrl" />
             </div>
             <div class="col-md-2 col-sm-2 col-xs-12" *ngIf="entity.Image">
-              <img [src]="baseFolder + entity.image" width="90" />
+              <img [src]="baseFolder + entity.Image" width="90" />
             </div>
           </div>
           <div class="form-group row" *ngIf="entity.Id">
@@ -124,7 +128,7 @@
               hoạt
               <input type="radio" #selectStatus="ngModel" name="selectStatus" [(ngModel)]="entity.Status" value="0" />
               Khóa
-              tài khoản
+              bài viết
             </div>
           </div>
           <div class="form-group row">
@@ -149,7 +153,7 @@
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Tags</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
-              <input type="text" #tag="ngModel" [(ngModel)]="entity.Tag" name="tag" class="form-control" />
+              <input type="text" #tags="ngModel" [(ngModel)]="entity.Tags" name="tags" class="form-control" />
             </div>
           </div>
           <div class="ln_solid"></div>
