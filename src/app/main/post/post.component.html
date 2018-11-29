@@ -19,8 +19,8 @@
           <table class="table table-striped">
             <tr>
               <th>Tên bài viết</th>
-              <th>Hiện thị trang chủ</th>
-              <th>Bài viết nổi bậc</th>
+              <th>Trang chủ</th>
+              <th>Nổi bậc</th>
               <th>Trạng thái</th>
               <th>Hình ảnh</th>
               <th></th>
@@ -120,15 +120,18 @@
               <img [src]="baseFolder + entity.Image" width="90" />
             </div>
           </div>
-          <div class="form-group row" *ngIf="entity.Id">
+          <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
-            <div class="col-md-6 col-sm-6 col-xs-12 ">
-              <input type="radio" #selectStatus="ngModel" name="selectStatus" [(ngModel)]="entity.Status" value="1" />
-              Kích
-              hoạt
-              <input type="radio" #selectStatus="ngModel" name="selectStatus" [(ngModel)]="entity.Status" value="0" />
-              Khóa
-              bài viết
+            <div class="col-md-10 col-sm-10 col-xs-12 ">
+              <label class="mr-2" *ngIf="entity.Id">
+                <input type="checkbox" [(ngModel)]="entity.Status" [name]="Status" name="status" [ngModelOptions]="{standalone: true}"> Kích hoạt
+              </label>
+              <label class="mr-2">
+                <input type="checkbox" [(ngModel)]="entity.HomeFlag" [name]="HomeFlag" name="homeFlag" [ngModelOptions]="{standalone: true}">Hiện thị trang chủ
+              </label>
+              <label>
+                <input type="checkbox" [(ngModel)]="entity.HotFlag" [name]="HotFlag" name="hotFlag" [ngModelOptions]="{standalone: true}">Bài viết nổi bật
+              </label>
             </div>
           </div>
           <div class="form-group row">
