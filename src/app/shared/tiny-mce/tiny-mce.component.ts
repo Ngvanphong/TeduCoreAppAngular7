@@ -25,8 +25,10 @@ export class TinyMceComponent implements OnInit, AfterViewInit, OnDestroy  {
       language_url: '/assets/tinymce/langs/vi_VN.js',
       paste_data_images: true,
       fontsize_formats: '8pt 10pt 12pt 13pt 14pt 15pt 18pt 24pt 36pt',
-      plugins: "autosave autolink code codesample colorpicker emoticons fullscreen hr image code imagetools media preview table textcolor wordcount",
+      plugins: "autoresize autosave autolink code codesample colorpicker emoticons fullscreen hr image code imagetools media preview table textcolor wordcount",
       toolbar: "imageupload  forecolor cut copy paste fontselect  fontsizeselect bold italic bold link preview code image ", 
+      autoresize_bottom_margin: 5,
+      autoresize_min_height: 100,    
       setup: editor => {
         this.editor = editor;
         editor.on('keyup', () => {

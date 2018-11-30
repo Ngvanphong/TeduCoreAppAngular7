@@ -51,6 +51,7 @@ export class PostAddComponent implements OnInit {
       else {
         tinymce.on('init', () => {
           tinymce.editor = ""
+          
         });
       }
     });

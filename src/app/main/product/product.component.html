@@ -126,9 +126,9 @@
           <div class="tab-content">
             <div id="basic" class="tab-pane fade show active ">
               <h3>Thông tin cơ bản</h3>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Tên</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="hidden" [(ngModel)]="entity.Id" name="id" />
                   <input type="text" #name="ngModel" (keyup)="createAlias(name.value)" [(ngModel)]="entity.Name"
                     required minlength="3" name="name" class="form-control" />
@@ -137,9 +137,9 @@
                   </small>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Alias</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Alias</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="text" #seoAlias="ngModel" [(ngModel)]="entity.SeoAlias" required minlength="3" name="seoAlias"
                     class="form-control" />
                   <small [hidden]="seoAlias.valid || (seoAlias.pristine && !addEditForm.submitted)" class="text-danger">
@@ -147,53 +147,79 @@
                   </small>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Danh mục</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Danh mục</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
                   <select class="form-control" name="categoryId" [(ngModel)]="entity.CategoryId">
                     <option *ngFor="let x of productCategories" [value]="x.Id">{{x.Name}}</option>
                   </select>
                   <input type="hidden" [(ngModel)]="entity.CategoryId" name="categoryId" class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Giá bán</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Giá bán</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="number" #price="ngModel" [(ngModel)]="entity.Price" required name="price" class="form-control" />
                   <small [hidden]="price.valid || (price.pristine && !addEditForm.submitted)" class="text-danger">
                     Bạn phải nhập giá bán
                   </small>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Giá khuyến mãi</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Giá khuyến mãi</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="number" #promotionPrice="ngModel" [(ngModel)]="entity.PromotionPrice" name="promotionPrice"
                     class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Giá gốc</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Giá gốc</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="number" #originalPrice="ngModel" [(ngModel)]="entity.OriginalPrice" name="originalPrice"
                     class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Đơn vị</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Tags</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
+                  <input type="text" #tag="ngModel" [(ngModel)]="entity.Tag" name="tag" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Seo title</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
+                  <input type="text" #seoPageTitle="ngModel" [(ngModel)]="entity.SeoPageTitle" name="seoPageTitle"
+                    class="form-control" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Từ khóa</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
+                  <input type="text" #seoKeywords="ngModel" [(ngModel)]="entity.SeoKeywords" name="seoKeywords" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Mô tả SEO</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
+                  <textarea type="text" #seoDescription="ngModel" rows=1 [(ngModel)]="entity.SeoDescription" name="seoDescription"
+                    class="form-control"></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Đơn vị</label>
+                <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="text" #unit="ngModel" [(ngModel)]="entity.Unit" name="unit" class="form-control" />
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Trạng thái</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="checkbox">
+              <div class="form-group row">
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
+                <div class="col-md-10 col-sm-10 col-xs-12 row">
+                  <div class="checkbox mr-2">
                     <label>
                       <input type="checkbox" [(ngModel)]="entity.Status" name="status" #status="ngModel"> Kích hoạt
                     </label>
                   </div>
-                  <div class="checkbox">
+                  <div class="checkbox mr-2">
                     <label>
                       <input type="checkbox" [(ngModel)]="entity.HomeFlag" name="homeFlag" #homeFlag="ngModel"> Hiển
                       thị trang chủ
@@ -213,41 +239,15 @@
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Mô tả</label>
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                  <textarea type="text" #description="ngModel" [(ngModel)]="entity.Description" name="description"
+                  <textarea type="text" #description="ngModel" rows=3 [(ngModel)]="entity.Description" name="description"
                     class="form-control"></textarea>
                 </div>
               </div>
-
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Chi tiết sản phẩm</label>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <app-simple-tiny [elementId]="'my-editor-id'" [content]="this.entity.Content" (onEditorKeyup)="keyupHandlerContentFunction($event)">
                   </app-simple-tiny>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Seo title</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <input type="text" #seoPageTitle="ngModel" [(ngModel)]="entity.SeoPageTitle" name="seoPageTitle" class="form-control" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Từ khóa</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <input type="text" #seoKeywords="ngModel" [(ngModel)]="entity.SeoKeywords" name="seoKeywords" class="form-control" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Mô tả SEO</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <textarea type="text" #seoDescription="ngModel" rows=4 [(ngModel)]="entity.SeoDescription" name="seoDescription"
-                    class="form-control"></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Tags</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <input type="text" #tag="ngModel" [(ngModel)]="entity.Tag" name="tag" class="form-control" />
                 </div>
               </div>
             </div>
@@ -408,7 +408,8 @@
               <input #quatityProductid class="form-control  mt-18 nolinebox" [(ngModel)]="item.Quantity" name="quatityProductid"
                 type="text">
               <td>
-                <button class="btn btn-danger mr-2" data-toggle="tooltip" data-placement="top" title="Xóa số lượng" (click)="deleteQuantity(item.ProductId,item.SizeId,item.ColorId)">
+                <button class="btn btn-danger mr-2" data-toggle="tooltip" data-placement="top" title="Xóa số lượng"
+                  (click)="deleteQuantity(item.ProductId,item.SizeId,item.ColorId)">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
                 <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật số lượng"
