@@ -127,7 +127,7 @@
             <div id="basic" class="tab-pane fade show active ">
               <h3>Thông tin cơ bản</h3>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Tên</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="hidden" [(ngModel)]="entity.Id" name="id" />
                   <input type="text" #name="ngModel" (keyup)="createAlias(name.value)" [(ngModel)]="entity.Name"
@@ -138,7 +138,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Alias</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Alias</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="text" #seoAlias="ngModel" [(ngModel)]="entity.SeoAlias" required minlength="3" name="seoAlias"
                     class="form-control" />
@@ -148,7 +148,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Danh mục</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Danh mục</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <select class="form-control" name="categoryId" [(ngModel)]="entity.CategoryId">
                     <option *ngFor="let x of productCategories" [value]="x.Id">{{x.Name}}</option>
@@ -157,7 +157,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Giá bán</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Giá bán</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="number" #price="ngModel" [(ngModel)]="entity.Price" required name="price" class="form-control" />
                   <small [hidden]="price.valid || (price.pristine && !addEditForm.submitted)" class="text-danger">
@@ -166,53 +166,53 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Giá khuyến mãi</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Giá khuyến mãi</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="number" #promotionPrice="ngModel" [(ngModel)]="entity.PromotionPrice" name="promotionPrice"
                     class="form-control" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Giá gốc</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Giá gốc</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="number" #originalPrice="ngModel" [(ngModel)]="entity.OriginalPrice" name="originalPrice"
                     class="form-control" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Tags</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Tags</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="text" #tag="ngModel" [(ngModel)]="entity.Tag" name="tag" class="form-control" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Seo title</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Seo title</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="text" #seoPageTitle="ngModel" [(ngModel)]="entity.SeoPageTitle" name="seoPageTitle"
                     class="form-control" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Từ khóa</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Từ khóa</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="text" #seoKeywords="ngModel" [(ngModel)]="entity.SeoKeywords" name="seoKeywords" class="form-control" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Mô tả SEO</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Mô tả SEO</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <textarea type="text" #seoDescription="ngModel" rows=1 [(ngModel)]="entity.SeoDescription" name="seoDescription"
                     class="form-control"></textarea>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Đơn vị</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Đơn vị</label>
                 <div class="col-md-10 col-sm-10 col-xs-12">
                   <input type="text" #unit="ngModel" [(ngModel)]="entity.Unit" name="unit" class="form-control" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
+                <label class="control-label textaligin-right col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
                 <div class="col-md-10 col-sm-10 col-xs-12 row">
                   <div class="checkbox mr-2">
                     <label>

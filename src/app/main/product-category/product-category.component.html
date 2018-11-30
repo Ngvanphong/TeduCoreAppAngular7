@@ -66,7 +66,7 @@
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Mô tả</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
-              <textarea type="text"  rows=3 #name2="ngModel" [(ngModel)]="entity.Description" name="description" class="form-control"></textarea>
+              <textarea type="text"  rows=2 #description="ngModel" [(ngModel)]="entity.Description" name="description" class="form-control"></textarea>
             </div>
           </div>
           <div class="form-group row">
@@ -97,6 +97,12 @@
                 </select>
               <input type="hidden" [(ngModel)]="entity.ParentId" name="parentId" class="form-control" />
             </div>
+          </div>         
+          <div class="form-group row">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Seo title</label>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <input type="text" #seoPageTitle="ngModel" [(ngModel)]="entity.SeoPageTitle" name="seoPageTitle" class="form-control" />
+            </div>
           </div>
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Từ khóa</label>
@@ -105,21 +111,15 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="control-label col-md-2 col-sm-2 col-xs-12">Seo title</label>
-            <div class="col-md-10 col-sm-10 col-xs-12">
-              <input type="text" #seoPageTitle="ngModel" [(ngModel)]="entity.SeoPageTitle" name="seoPageTitle" class="form-control" />
-            </div>
-          </div>
-          <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Mô tả SEO</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
-              <textarea type="text" #seoDescription="ngModel" rows=4 [(ngModel)]="entity.SeoDescription" name="seoDescription"
+              <textarea type="text" #seoDescription="ngModel" rows=2 [(ngModel)]="entity.SeoDescription" name="seoDescription"
                 class="form-control"></textarea>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
-            <div class="col-md-10 col-sm-10 col-xs-12">
+            <div class="col-md-10 col-sm-10 col-xs-12 row">
               <div class="checkbox">
                 <label>
                    <input type="checkbox" [(ngModel)]="entity.Status" name="status" #status="ngModel"> Kích hoạt
