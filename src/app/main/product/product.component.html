@@ -248,18 +248,23 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <app-simple-tiny [elementId]="'my-editor-id'" [content]="this.entity.Content" (onEditorKeyup)="keyupHandlerContentFunction($event)">
                   </app-simple-tiny>
+                </div>                
+              </div>
+              <div class="form-group">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+                  <button type="button" (click)="showImageManageContent(entity.Id)" class="btn btn-primary">Quản lý ảnh
+                    cho nội dung</button>
                 </div>
               </div>
             </div>
           </div>
           <div class="ln_solid"></div>
           <div class="form-group">
-            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
-              <button type="button" (click)="addEditModal.hide()" class="btn btn-danger mr-2">Hủy bỏ</button>
-              <button type="submit" class="btn btn-success" [disabled]="!addEditForm.form.valid">Cập nhật</button>
+            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">            
+              <button type="submit" class="btn btn-success  mr-2" [disabled]="!addEditForm.form.valid">Cập nhật</button>
+              <button type="button" (click)="confirmHideaddEditModal()" class="btn btn-danger">Hủy bỏ</button>
             </div>
           </div>
-
         </form>
       </div>
     </div>
@@ -323,6 +328,92 @@
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
                 <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật ảnh" (click)="updateImage(image.Id,caption.value)">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ln_solid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--Quản lý ảnh nội dung -->
+<div bsModal #imageManageModalContent="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Quản lý ảnh sản phẩm</h4>
+        <button type="button" class="close pull-right" (click)="closePopupImageContent()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal form-label-left input_mask" *ngIf="imageEntityContent" novalidate
+          #imageFormContent="ngForm" (ngSubmit)="saveProductImageContent(imageFormContent)">
+          <div class="form-group row">
+            <div class="col-xs-3">
+              <label>Chọn ảnh</label>
+              <input type="file" required #imagePathContent name="imagePathContent" class="form-control">
+              <p class="help-block label label-danger"> chỉ hỗ trợ định dạng *.png, *.jpg, *.jpeg </p>
+              <input type="hidden" [(ngModel)]="imageEntityContent.Path" name="imagePath" />
+              <input type="hidden" [(ngModel)]="imageEntityContent.ProductId" name="productId" />
+            </div>
+            <div class="col-md-4 col-xs-3">
+              <label for="ex2">Mô tả</label>
+              <input class="form-control" name="caption" [(ngModel)]="imageEntityContent.Caption" type="text">
+            </div>
+            <div class="col-xs-3">
+              <button type="submit" class="btn btn-primary mt-27" [disabled]="!imageFormContent.valid">Thêm</button>
+            </div>
+          </div>
+        </form>
+        <table class="table" *ngIf="productImagesContent && productImagesContent.length > 0">
+          <thead>
+            <tr>
+              <th>
+                Hình ảnh
+              </th>
+              <th>
+                Đường dẫn
+              </th>
+              <th>
+                Mô tả
+              </th>         
+              <th>
+                Tắt
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let imageContent of productImagesContent">
+              <td>
+                <img [src]="baseFolder + imageContent.Path" width="100" />
+              </td>             
+              <td>
+                {{baseFolder+imageContent.Path}}
+              </td>
+              <td>
+                <input #captionContent="ngModel" class="form-control nolinebox" [(ngModel)]="imageContent.Caption" name="captionContent"
+                  type="text">
+              </td>
+              <td>
+                <label>
+                  <input type="checkbox" [(ngModel)]="imageContent.SwitchImage" [name]="switchImage" name="status"
+                    [ngModelOptions]="{standalone: true}">
+                </label>
+              </td>
+              <td>
+                <button class="btn btn-danger mr-2" data-toggle="tooltip" data-placement="top" title="Xóa ảnh" (click)="deleteImageContent(imageContent.Id)">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật ảnh" (click)="updateImageContent(imageContent.Id,captionContent.value,imageContent.SwitchImage)">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </button>
               </td>

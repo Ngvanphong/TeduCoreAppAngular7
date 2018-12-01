@@ -1,13 +1,13 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import {UtilityService} from '../../core/service/utility.service';
-import {DataService} from '../../core/service/data.service';
-import {SystemConstant} from '../../core/common/system.constant';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { UtilityService } from '../../core/service/utility.service';
+import { DataService } from '../../core/service/data.service';
+import { SystemConstant } from '../../core/common/system.constant';
 import { ModalDirective } from 'ngx-bootstrap';
-import {NotificationService} from '../../core/service/notification.service';
-import {MessageConstant} from '../../core/common/message.constant';
-import {NgForm} from '@angular/forms';
-import {UploadService} from '../../core/service/upload.service';
-declare const tinymce:any;
+import { NotificationService } from '../../core/service/notification.service';
+import { MessageConstant } from '../../core/common/message.constant';
+import { NgForm } from '@angular/forms';
+import { UploadService } from '../../core/service/upload.service';
+declare const tinymce: any;
 
 @Component({
   selector: 'app-product',
@@ -35,6 +35,14 @@ export class ProductComponent implements OnInit {
   public imageEntity: any = {};
   public productImages: any[];
   public image: any = {};
+  /*ImageContent Management */
+  @ViewChild('imageManageModalContent') private imageManageModalContent: ModalDirective;
+  @ViewChild('imagePathContent') private imagePathContent;
+  public imageEntityContent: any = {};
+  public productImagesContent: any[];
+  public imageContent: any = {};
+
+
   /*Quantity Management*/
   @ViewChild('quantityManageModal') private quantityManageModal: ModalDirective;
   public quantityEntity: any = {};
@@ -42,10 +50,10 @@ export class ProductComponent implements OnInit {
   public sizeId: number = null;
   public colorId: number = null;
   public sizes: any[];
-  public colors:any[];
+  public colors: any[];
 
-  constructor(private _utilityService: UtilityService,private _dataService:DataService,
-    private _notificationService:NotificationService,private _uploadService:UploadService) { }
+  constructor(private _utilityService: UtilityService, private _dataService: DataService,
+    private _notificationService: NotificationService, private _uploadService: UploadService) { }
 
   ngOnInit() {
     this.search();
@@ -53,20 +61,20 @@ export class ProductComponent implements OnInit {
   }
 
   pageChanged(event: any): void {
-    this.pageIndex= event.page;
+    this.pageIndex = event.page;
     this.search();
   }
   public search() {
     this._dataService.get('/api/product/getall?page=' + this.pageIndex + '&pageSize=' + this.pageSize + '&keyword=' + this.filterKeyword + '&categoryId='
       + this.filterCategoryId + '&filterHotPromotion=' + this.filterHotPromotion)
-      .subscribe((response: any) =>{
-        if (response!=null){
-            this.products = response.Items;
-            this.pageIndex = response.PageIndex;
-            this.totalRow = response.TotalRows;
+      .subscribe((response: any) => {
+        if (response != null) {
+          this.products = response.Items;
+          this.pageIndex = response.PageIndex;
+          this.totalRow = response.TotalRows;
         }
-      }      
-     );
+      }
+      );
   }
 
   public reset() {
@@ -83,7 +91,7 @@ export class ProductComponent implements OnInit {
   }
 
   private deleteConfirm(id: string) {
-    this._dataService.delete('/api/product/delete', 'id', id).subscribe((response: any) => {    
+    this._dataService.delete('/api/product/delete', 'id', id).subscribe((response: any) => {
       this.search();
     });
   }
@@ -99,14 +107,14 @@ export class ProductComponent implements OnInit {
       checkedIds.push(this.checkedItems[i]["Id"]);
     };
     this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => {
-      this._dataService.delete('/api/product/deletemulti', 'checkedProducts', JSON.stringify(checkedIds)).subscribe((res) => {      
+      this._dataService.delete('/api/product/deletemulti', 'checkedProducts', JSON.stringify(checkedIds)).subscribe((res) => {
         this.search();
       });
     });
   }
 
   public showAdd() {
-    this.entity = { Content: '' ,Status:true};
+    this.entity = { Content: '', Status: true };
     if (this.flagInitTiny) {
       tinymce.on('init', () => {
       });
@@ -115,7 +123,13 @@ export class ProductComponent implements OnInit {
     else {
       tinymce.activeEditor.setContent('');
     }
-    this.addEditModal.show();   
+    this.addEditModal.show();
+  }
+
+  confirmHideaddEditModal(){
+    this._notificationService.printConfirmationDialog("Bạn có chắc muốn thoát ?",()=>{
+      this.addEditModal.hide();
+    })
   }
 
   public keyupHandlerContentFunction(e: any) {
@@ -142,23 +156,23 @@ export class ProductComponent implements OnInit {
   }
 
   public saveChanges(form: NgForm) {
-    if(form.valid==true){
+    if (form.valid == true) {
       if (this.entity.Id == undefined) {
         this._dataService.post('/api/product/add', JSON.stringify(this.entity)).subscribe((res: any) => {
-          if (res!=null){
+          if (res != null) {
             this.search();
-            this.addEditModal.hide();       
+            this.addEditModal.hide();
             form.resetForm();
-          }       
+          }
         });
       }
       else {
         this._dataService.put('/api/product/update', JSON.stringify(this.entity)).subscribe((response: any) => {
-          if(response!=null){
+          if (response != null) {
             this.search();
-            this.addEditModal.hide();        
+            this.addEditModal.hide();
             form.resetForm();
-          }     
+          }
         });
       }
     }
@@ -167,7 +181,7 @@ export class ProductComponent implements OnInit {
   /*Imange Management*/
   public showImageManage(id: any) {
     this.imageEntity = {
-      ProductId: id
+      ProductId: id,
     };
     this.loadProductImage(id);
     this.imageManageModal.show();
@@ -180,11 +194,12 @@ export class ProductComponent implements OnInit {
   }
 
   public saveProductImage(forms: NgForm) {
-    if (forms.valid==true) {
+    if (forms.valid == true) {
       var fi = this.imagePath.nativeElement;
       if (fi.files.length > 0) {
         this._uploadService.postWithFile('/api/upload/saveImage?type=product', null, fi.files).then((imageUrl) => {
           this.imageEntity.Path = imageUrl;
+        }).then(() => {
           this._dataService.post('/api/productImage/add', JSON.stringify(this.imageEntity)).subscribe((res) => {
             this.imagePath.nativeElement.value = '';
             this.loadProductImage(this.imageEntity.ProductId);
@@ -192,27 +207,26 @@ export class ProductComponent implements OnInit {
           })
         })
       }
-
     }
   }
+
   public deleteImage(imageId: string) {
     this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => {
-      this._dataService.delete('/api/productImage/delete', 'id', imageId.toString()).subscribe((res) => {       
+      this._dataService.delete('/api/productImage/delete', 'id', imageId.toString()).subscribe((res) => {
         this.loadProductImage(this.imageEntity.ProductId);
       });
     })
-
   }
   private thumbnailImage() {
     this._dataService.put('/api/product/thumnailImage?productId=' + this.imageEntity.ProductId).subscribe((res) => {
       this.search();
     });
   }
-  public closePopupImage(){
+  public closePopupImage() {
     this.thumbnailImage();
     this.imageManageModal.hide();
   }
-  /* Code method API put image for product flow ImageId */
+
   public updateImage(imageId: any, caption: any) {
     for (let item of this.productImages) {
       if (item.Id == imageId) {
@@ -222,12 +236,70 @@ export class ProductComponent implements OnInit {
     }
     this._dataService.put('/api/productImage/update', JSON.stringify(this.image)).subscribe((res) => {
     });
-
   }
 
-   /*Quantity management */
+  /*ImageContent Management */
+  public showImageManageContent(id: any) {
+    this.imageEntityContent = {
+      ProductId: id,
+    };
+    this.loadProductImageContent(id);
+    this.imageManageModalContent.show();
 
-   private loadSizes() {
+  };
+  private loadProductImageContent(id: any) {
+    this._dataService.get('/api/productImage/getallImageContent?productId=' + id).subscribe((res) => {
+      this.productImagesContent = res;
+    });
+  }
+
+  public closePopupImageContent() {
+    this.imageManageModalContent.hide();
+  }
+
+  public saveProductImageContent(forms: NgForm) {
+    if (forms.valid == true) {
+      var fi = this.imagePathContent.nativeElement;
+      if (fi.files.length > 0) {
+        this._uploadService.postWithFile('/api/upload/saveImage?type=product', null, fi.files).then((imageUrl) => {
+          this.imageEntityContent.Path = imageUrl;
+          this.imageEntityContent.SwitchImage = true;
+        }).then(() => {
+          this._dataService.post('/api/productImage/add', JSON.stringify(this.imageEntityContent)).subscribe((res) => {
+            this.imagePathContent.nativeElement.value = '';
+            this.loadProductImageContent(this.imageEntityContent.ProductId);
+            this.imageEntityContent.Caption = '';
+          })
+        })
+      }
+    }
+  }
+
+
+  public updateImageContent(imageId: any, caption: any, switchImage: any) {
+    for (let item of this.productImagesContent) {
+      if (item.Id == imageId) {
+        this.imageContent = item;
+        this.imageContent.Caption = caption;
+        this.imageContent.SwitchImage = switchImage
+      }
+    }
+    this._dataService.put('/api/productImage/update', JSON.stringify(this.imageContent)).subscribe((res) => {
+    });
+  }
+
+  public deleteImageContent(imageId: string) {
+    this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => {
+      this._dataService.delete('/api/productImage/delete', 'id', imageId.toString()).subscribe((res) => {
+        this.loadProductImageContent(this.imageEntityContent.ProductId);
+      });
+    })
+  }
+
+
+  /*Quantity management */
+
+  private loadSizes() {
     this._dataService.get('/api/productQuantity/getsizes').subscribe((res) => {
       this.sizes = res;
     });
@@ -254,27 +326,27 @@ export class ProductComponent implements OnInit {
     this.quantityManageModal.show();
   }
 
-  public saveProductQuantity(forms:NgForm) {
+  public saveProductQuantity(forms: NgForm) {
     this._dataService.post('/api/productQuantity/add', JSON.stringify(this.quantityEntity)).subscribe(res => {
-      if(res!=null){
+      if (res != null) {
         this.loadProductQuatity(this.quantityEntity.ProductId);
         this.quantityEntity = {
           ProductId: this.quantityEntity.ProductId,
         };
-        forms.resetForm(); 
-      }    
+        forms.resetForm();
+      }
     });
   }
 
-  public deleteQuantity(productId: any, sizeId: any,colorId:any) {
+  public deleteQuantity(productId: any, sizeId: any, colorId: any) {
     let prama: any = {
-      "productId": productId, "sizeId": sizeId,"colorId": colorId
+      "productId": productId, "sizeId": sizeId, "colorId": colorId
     }
     this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => {
       this._dataService.deleteWithMultiParams('/api/productQuantity/delete', prama).subscribe((res) => {
-        if(res!=null){
+        if (res != null) {
           this.loadProductQuatity(productId);
-        }     
+        }
       });
     })
   }
@@ -282,21 +354,21 @@ export class ProductComponent implements OnInit {
   /* Create API update quatity for product*/
   public items: any = {}
 
-  public updateQuantity(productId: any, sizeId: number,colorId:number, count: any) {
+  public updateQuantity(productId: any, sizeId: number, colorId: number, count: any) {
     let prama: any = {
-      "productId": productId, "sizeId": sizeId,"colorId":colorId
+      "productId": productId, "sizeId": sizeId, "colorId": colorId
     }
     for (let item of this.productQuantities) {
-      if (item.SizeId == sizeId&&item.ColorId==colorId) {
+      if (item.SizeId == sizeId && item.ColorId == colorId) {
         this.items = item;
         this.items.Quantity = Number.parseInt(count);
       };
     }
-    this._dataService.put('/api/productQuantity/update', JSON.stringify(this.items)).subscribe((res) => {   
+    this._dataService.put('/api/productQuantity/update', JSON.stringify(this.items)).subscribe((res) => {
     })
 
   }
 
-    
+
 
 }
