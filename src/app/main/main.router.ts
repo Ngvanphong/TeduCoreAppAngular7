@@ -10,7 +10,8 @@ export const mainRouter:Routes=[
     {path:'role',loadChildren:'./role/role.module#RoleModule'},
     {path:'user',loadChildren:'./user/user.module#UserModule'},
     {path:'product',loadChildren:'./product/product.module#ProductModule'},
-    {path:'productcategory',loadChildren:'./product-category/product-category.module#ProductCategoryModule'},    
+    {path:'productcategory',loadChildren:'./product-category/product-category.module#ProductCategoryModule'}, 
+    {path:'slide',loadChildren:'./slide/slide.module#SlideModule'},   
 ]},
 
 ]

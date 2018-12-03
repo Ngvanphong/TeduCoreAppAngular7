@@ -14,9 +14,9 @@
 
 <tree-root #treeProductCategory [nodes]="_productCategoryHierachy">
   <ng-template #treeNodeTemplate let-node let-index="index">
-    <span>{{node.data.Name }}</span>
-    <button class="btn btn-primary mr-2" (click)="showEdit(node.data.Id)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-    <button class="btn btn-danger" (click)="delete(node.data.Id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    <span> {{ node.data.Name}}  </span>
+    <button class="btn btn-primary mr-2" (click)="showEdit(node.data.Id)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button>
+    <button class="btn btn-danger" (click)="delete(node.data.Id)"><i class="fa fa-trash" aria-hidden="true"></i> </button>
   </ng-template>
 </tree-root>
 
