@@ -22,7 +22,6 @@ export class PostAddComponent implements OnInit {
   public entity: any = { Content: '' };
   public posts: any[];
   public postCategories: any[]
-  public flagShowImage: boolean = false;
   public blogId: Observable<string>
 
   @ViewChild('imagePath') private imagePath;
@@ -123,8 +122,6 @@ export class PostAddComponent implements OnInit {
   public updateImage(id:string,caption:string) {
     this._dataService.put('/api/postimage/update?id='+id+'&'+'caption='+caption).subscribe((res) => { })
   }
-
-
 
 
 }
