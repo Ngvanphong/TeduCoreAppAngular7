@@ -11,7 +11,10 @@ export const mainRouter:Routes=[
     {path:'user',loadChildren:'./user/user.module#UserModule'},
     {path:'product',loadChildren:'./product/product.module#ProductModule'},
     {path:'productcategory',loadChildren:'./product-category/product-category.module#ProductCategoryModule'}, 
-    {path:'slide',loadChildren:'./slide/slide.module#SlideModule'},   
+    {path:'slide',loadChildren:'./slide/slide.module#SlideModule'}, 
+    {path:'order',loadChildren:'./order/order.module#OrderModule'}, 
+    {path:'order/add',loadChildren:'./order-add/order-add.module#OrderAddModule'}, 
+    {path:'order/detail',loadChildren:'./order-detail/order-detail.module#OrderDetailModule'},    
 ]},
 
 ]

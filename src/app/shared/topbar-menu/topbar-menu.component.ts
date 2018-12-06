@@ -37,7 +37,7 @@ export class TopbarMenuComponent implements OnInit {
 
   markAsRead(id: number) {
     var body = { orderId: id };
-    this._dataService.get('/api/orderuserannoucement/markAsRead?orderId=' + id.toString()).subscribe((response: any) => {
+    this._dataService.get('/api/orderuserannoucement/markAsRead?Id=' + id.toString()).subscribe((response: any) => {
       if (response) {
         this.loadAnnouncements();
         this._router.navigate(['/main/order/detail/'+id]);
@@ -46,7 +46,6 @@ export class TopbarMenuComponent implements OnInit {
   }
 
   private subscribeToEvents(): void {
-
     var self = this;
     self.announcements = []; 
     // finally our service method to call when response received from server event and transfer response to some variable to be shwon on the browser.  
