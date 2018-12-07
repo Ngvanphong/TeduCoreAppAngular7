@@ -15,8 +15,11 @@ export class SignalrService {
       .build();
     this.connection.start().catch(err => document.write(err));
     this.connection.on("messageReceived", (message: string) => { 
-      this.announcementReceived.emit(message);    
+     this.announcementReceived.emit(message)
     });
+  }
+  public sendAnnoucement(message){
+    this.connection.send("newMessage",message)
   }
 
 }

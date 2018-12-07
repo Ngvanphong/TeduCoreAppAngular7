@@ -14,7 +14,7 @@
   </div>
   <div class="col-md-2 col-sm-2 col-xs-12 form-group ">
     <select class="form-control" name="billStatus" [(ngModel)]="filterbillStatus">
-      <option value="">--Tất cả--</option>
+      <option value="5">--Tất cả--</option>
       <option value="0">New</option>
       <option value="1">InProgress</option>
       <option value="2"> Returned</option>
@@ -32,10 +32,7 @@
 
 <div class="row">
   <div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="form-group">
-        <button class="btn btn-success btn-fw" (click)="showAdd()">Thêm mới</button>
-      </div>
+    <div class="card">    
       <div class="card-body">
         <div class="table-responsive" *ngIf="orders && orders.length > 0">
           <table class="table table-striped">
@@ -51,10 +48,10 @@
                 <td>{{item.CustomerName}}</td>
                 <td>{{item.CustomerMobile}}</td>
                 <td>{{item.DateCreated | date}}</td>
-                <td *ngIf="item.Status==0"><i class="fa fa-exclamation-triangle"></i>Hợp lệ</td>
-                <td *ngIf="item.Status==1"><i class="fa fa-check-square-o"></i>Không hợp lệ</td>
+                <td *ngIf="item.Status==0"><i class="fa fa-exclamation-triangle"></i>Không hợp lệ</td>
+                <td *ngIf="item.Status==1"><i class="fa fa-check-square-o"></i>Hợp lệ</td>
                 <td>
-                  <a class="btn btn-primary"  routerLink="/main/order/detail/{{item.Id}}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                  <a class="btn btn-primary mr-2"  routerLink="/main/order/detail/{{item.Id}}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                   <button class="btn btn-danger" (click)="delete(item.Id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </td>
               </tr>  

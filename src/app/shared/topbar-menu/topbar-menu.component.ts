@@ -36,7 +36,6 @@ export class TopbarMenuComponent implements OnInit {
   }
 
   markAsRead(id: number) {
-    var body = { orderId: id };
     this._dataService.get('/api/orderuserannoucement/markAsRead?Id=' + id.toString()).subscribe((response: any) => {
       if (response) {
         this.loadAnnouncements();
@@ -51,7 +50,7 @@ export class TopbarMenuComponent implements OnInit {
     // finally our service method to call when response received from server event and transfer response to some variable to be shwon on the browser.  
     this._signalRService.announcementReceived.subscribe((announcement: any) => {
       this._ngZone.run(() => {
-        announcement.CreateDate = moment(announcement.CreateDate).fromNow();
+        announcement.DateCreated = moment(announcement.DateCreated).fromNow();
         self.announcements.push(announcement);
       });
     });
@@ -61,7 +60,7 @@ export class TopbarMenuComponent implements OnInit {
     this._dataService.get('/api/orderuserannoucement/getTopMyAnnouncement').subscribe((response: any) => {
       this.announcements = [];
       for (let item of response) {
-        item.CreateDate = moment(item.CreateDate).fromNow();
+        item.DateCreated = moment(item.DateCreated).fromNow();
         this.announcements.push(item);
       }
     });
