@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from '../../core/service/data.service';
+import {SystemConstant} from '../../core/common/system.constant';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import {UtilityService} from '../../core/service/utility.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -6,10 +10,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-detail.component.css']
 })
 export class OrderDetailComponent implements OnInit {
+  public orderDetails: any[];
+  public entity: any;
+  public totalAmount: number;
+  public orderId:any;
+  public baseFolder:string=SystemConstant.BASE_API;
 
-  constructor() { }
-
+  constructor(private _dataService:DataService, private _activatedRoute:ActivatedRoute,
+    private _utilityService:UtilityService) { }
   ngOnInit() {
+    this._activatedRoute.params.subscribe((params: Params) => {
+      this.orderId=params['id'];
+      this.loadOrder(params['id']);
+      this.loadOrderDetail(params['id']);
+    });
   }
+
+  public loadOrder(id: number) {
+    this._dataService.get('/api/order/detail/' + id.toString()).subscribe((response: any) => {
+      this.entity = response;
+    });
+  }
+
+  public loadOrderDetail(id: number) {
+    this._dataService.get('/api/order/getalldetails/' + id.toString()).subscribe((response: any[]) => {
+      this.orderDetails = response;
+      this.totalAmount = 0;
+      for(var item of this.orderDetails){
+        this.totalAmount = this.totalAmount + (item.Quantity * item.Price);
+      }
+    });
+  }
+
+  public goBack() {
+    this._utilityService.navigate('/main/order/index');
+  }
+
 
 }

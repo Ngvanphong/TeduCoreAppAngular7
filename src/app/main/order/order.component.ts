@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../core/service/data.service';
+import {NotificationService} from '../../core/service/notification.service';
+import {MessageConstant} from '../../core/common/message.constant';
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -17,7 +20,7 @@ export class OrderComponent implements OnInit {
   public orders: any[]=[];
   
    
-  constructor(private _dataService:DataService) { 
+  constructor(private _dataService:DataService,private _notificationService:NotificationService) { 
     
   }
 
@@ -48,6 +51,14 @@ export class OrderComponent implements OnInit {
         this.pageIndex = response.PageIndex;
         this.totalRow=response.TotalRows;
       });
+  }
+
+  public delete(id: string) {
+    this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => {
+      this._dataService.delete('/api/order/delete', 'id', id).subscribe((response: any) => {     
+        this.search();
+      });
+    });
   }
 
 }

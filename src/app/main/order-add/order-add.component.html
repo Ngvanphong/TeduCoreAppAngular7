@@ -26,7 +26,7 @@
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Địa chỉ </label>
             <div class="col-md-10 col-sm-10 col-xs-12">
               <textarea class="form-control" #customerAddress="ngModel" [(ngModel)]="entity.CustomerAddress" name="customerAddress"
-                rows="3"></textarea>
+                rows="2"></textarea>
             </div>
           </div>
           <div class="form-group row">
@@ -73,7 +73,7 @@
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái thanh toán</label>
             <div class="col-md-10 col-sm-10 col-xs-12 ">
-              <select class="form-control" name="billStatus" [(ngModel)]="filterbillStatus">
+              <select class="form-control" #billStatus="ngModel" name="billStatus" [(ngModel)]="entity.BillStatus">
                 <option value="0">New</option>
                 <option value="1">InProgress</option>
                 <option value="2"> Returned</option>
@@ -102,18 +102,10 @@
               <table class="table" *ngIf="orderDetails && orderDetails.length > 0">
                 <thead>
                   <tr>
-                    <th>
-                      Sản phẩm
-                    </th>
-                    <th>
-                      Màu sắc
-                    </th>
-                    <th>
-                      Kích thước
-                    </th>
-                    <th>
-                      Số lượng
-                    </th>
+                    <th>Sản phẩm</th>
+                    <th>Màu sắc</th>
+                    <th>Kích thước</th>
+                    <th>Số lượng</th>
                     <th>Giá</th>
                     <th>Thành tiền</th>
                     <th></th>
@@ -121,18 +113,10 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of orderDetails">
-                    <td>
-                      {{item.Product.Name}}
-                    </td>
-                    <td>
-                      {{item.Color.Name}}
-                    </td>
-                    <td>
-                      {{item.Size.Name}}
-                    </td>
-                    <td>
-                      {{item.Quantity}}
-                    </td>
+                    <td>{{item.Product.Name}}</td>
+                    <td>{{item.Color.Name}}</td>
+                    <td>{{item.Size.Name}}</td>
+                    <td>{{item.Quantity}}</td>
                     <td>{{item.Price}}</td>
                     <td>{{item.Price * item.Quantity}}</td>
                     <td>
