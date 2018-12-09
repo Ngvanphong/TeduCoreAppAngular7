@@ -13,8 +13,8 @@
     <input type="text"  name="customerName" [(ngModel)]="filterCustomerName" class="form-control" placeholder="Tên khách hàng">
   </div>
   <div class="col-md-2 col-sm-2 col-xs-12 form-group ">
-    <select class="form-control" name="billStatus" [(ngModel)]="filterbillStatus">
-      <option value="5">--Tất cả--</option>
+    <select class="form-control" #billStatus="ngModel" name="billStatus" [(ngModel)]="filterbillStatus">
+      <option value="5">Tất cả</option>
       <option value="0">New</option>
       <option value="1">InProgress</option>
       <option value="2"> Returned</option>

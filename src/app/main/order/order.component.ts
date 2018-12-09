@@ -15,11 +15,10 @@ export class OrderComponent implements OnInit {
   public pageDisplay: number = 10;
   public filterCustomerName: string = '';
   public filterStartDate: string = '';
-  public filterbillStatus: string = '';
+  public filterbillStatus: string = '5';
   public filterEndDate: string = '';
   public orders: any[]=[];
-  
-   
+    
   constructor(private _dataService:DataService,private _notificationService:NotificationService) { 
     
   }
