@@ -23,7 +23,7 @@ export class ProductComponent implements OnInit {
   public pageSize: number = 10;
   public pageDisplay: number = 7;
   public filterKeyword: string = '';
-  public filterCategoryId: number = null;
+  public filterCategoryId: string = '';
   public filterHotPromotion: string = "";
   public products: any[];
   public productCategories: any[]
@@ -51,6 +51,11 @@ export class ProductComponent implements OnInit {
   public colorId: number = null;
   public sizes: any[];
   public colors: any[];
+
+  /* WolePriceProduct Management */
+  public wholePriceEntity:any={};
+  public wholePrices:any[];
+  @ViewChild('wholePriceModal') private wholePriceModal:ModalDirective;
 
   constructor(private _utilityService: UtilityService, private _dataService: DataService,
     private _notificationService: NotificationService, private _uploadService: UploadService) { }
@@ -355,9 +360,6 @@ export class ProductComponent implements OnInit {
   public items: any = {}
 
   public updateQuantity(productId: any, sizeId: number, colorId: number, count: any) {
-    let prama: any = {
-      "productId": productId, "sizeId": sizeId, "colorId": colorId
-    }
     for (let item of this.productQuantities) {
       if (item.SizeId == sizeId && item.ColorId == colorId) {
         this.items = item;
@@ -367,6 +369,54 @@ export class ProductComponent implements OnInit {
     this._dataService.put('/api/productQuantity/update', JSON.stringify(this.items)).subscribe((res) => {
     })
 
+  }
+
+  /* WholePricce Product */
+
+  public showWholePriceProduct(id:string){
+    this.loadWholePrice(id);
+    this.wholePriceEntity= {
+      ProductId:id,
+    }
+    this.wholePriceModal.show();
+  }
+
+  private loadWholePrice(id:string){
+    this._dataService.get("/api/wholePrice/getall?productId="+id).subscribe((res)=>{
+      this.wholePrices=res;
+    })
+  }
+
+  public deleteWholePrice(id:string){
+     this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG,()=>{
+       this._dataService.delete("/api/wholePrice/delete","id",id).subscribe(res=>{
+         if(res!=undefined) this.loadWholePrice(this.wholePriceEntity.ProductId);       
+       })
+     })
+  }
+
+ public updateWholePrice(id:string,productId:string,fromQuantity:string,toQuantity:string,price:number){
+    let prama={
+        Id:id,
+        ProductId:productId,
+        FromQuantity:fromQuantity,
+        ToQuantity:toQuantity,
+        Price:price,
+    }
+    this._dataService.put("/api/wholePrice/update",prama).subscribe((res)=>{
+    })
+ }
+
+  public saveProductWholePrice(valid:boolean){
+    if(valid){
+      this._dataService.post("/api/wholePrice/add",this.wholePriceEntity).subscribe((res=>{
+        if(res!=undefined){
+          this.loadWholePrice(this.wholePriceEntity.ProductId)
+          this.wholePriceEntity.FromQuantity=this.wholePriceEntity.ToQuantity+1;
+          setTimeout(this.wholePriceEntity.ToQuantity="",2000);
+        }
+      }))
+    }
   }
 
 

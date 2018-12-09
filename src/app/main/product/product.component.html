@@ -72,6 +72,11 @@
                     <i class="fa fa-bandcamp" aria-hidden="true"></i>
                   </button>
 
+                  <button class="btn btn-success mr-2" data-toggle="tooltip" data-placement="top" title="Quản lý giá bán sỉ"
+                    (click)="showWholePriceProduct(item.Id)">
+                    <i class="fa fa-hourglass-half" aria-hidden="true"></i>
+                  </button>
+
                   <button class="btn btn-default mr-2" data-toggle="tooltip" data-placement="top" title="Cập nhật sản phẩm"
                     (click)="showEdit(item.Id)">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -485,6 +490,85 @@
                 </button>
                 <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật số lượng"
                   (click)="updateQuantity(item.ProductId,item.SizeId,item.ColorId,item.Quantity)">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ln_solid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--Quản lý giá bán sỉ-->
+
+<div bsModal #wholePriceModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Quản lý giá bán sỉ</h4>
+        <button type="button" class="close pull-right" (click)="wholePriceModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal form-label-left input_mask" novalidate #wholePriceForm="ngForm" (ngSubmit)="saveProductWholePrice(wholePriceForm.valid)"
+          *ngIf="wholePriceEntity">
+          <div class="form-group row">
+            <div class="col-md-3 col-xs-3">
+              <label>Số lượng từ</label>
+              <input #fromQuantity="ngModel" required class="form-control" [(ngModel)]="wholePriceEntity.FromQuantity" name="fromQuantity"
+                type="number">
+              <small [hidden]="fromQuantity.valid || (fromQuantity.pristine && !wholePriceForm.submitted)" class="text-danger">
+                Bạn phải nhập số lượng thấp nhất
+              </small>
+            </div>
+            <div class="col-md-3 col-xs-3">
+              <label>Số lượng đến</label>
+              <input #toQuantity="ngModel" class="form-control" [(ngModel)]="wholePriceEntity.ToQuantity" name="toQuantity" type="number">
+            </div>
+            <div class="col-md-3 col-xs-3">
+              <label>Giá bán</label>
+              <input #wholePrice="ngModel" required class="form-control" [(ngModel)]="wholePriceEntity.Price" name="wholePrice"
+                type="number">
+              <small [hidden]="wholePrice.valid || (wholePrice.pristine && !wholePriceForm.submitted)" class="text-danger">
+                Bạn phải giá bán
+              </small>
+            </div>
+            <div class="col-xs-3">
+              <button type="submit" [disabled]="!wholePriceForm.valid" class="btn btn-primary mt-27">Thêm</button>
+            </div>
+          </div>
+        </form>
+        <table class="table" *ngIf="wholePrices && wholePrices.length > 0">
+          <thead>
+            <tr>
+              <th>Số lượng từ</th>
+              <th>Số lượng đến</th>
+              <th>Giá</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of wholePrices">
+              <td><input class="form-control nolinebox" #fromQuantity2="ngModel" required [(ngModel)]="item.FromQuantity"
+                  name="fromQuantity2" type="number"></td>
+              <td><input class="form-control nolinebox" #toQuantity2="ngModel" [(ngModel)]="item.ToQuantity" name="toQuantity2"
+                  type="number"></td>
+              <td><input class="form-control nolinebox" #wholePrice2="ngModel" required [(ngModel)]="item.Price" name="wholePrice2"
+                  type="number"></td>
+              <td>
+                <button class="btn btn-danger mr-2" data-toggle="tooltip" data-placement="top" title="Xóa"
+                  (click)="deleteWholePrice(item.Id)">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật"
+                  (click)="updateWholePrice(item.Id,item.ProductId,item.FromQuantity,item.ToQuantity,item.Price)">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </button>
               </td>
