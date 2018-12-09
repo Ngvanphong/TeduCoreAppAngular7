@@ -69,7 +69,7 @@
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái thanh toán</label>
             <div class="col-md-10 col-sm-10 col-xs-12 ">
-              <select disabled class="form-control" #billStatus="ngModel" name="billStatus" [(ngModel)]="BillStatus">
+              <select disabled class="form-control" #billStatus="ngModel" name="billStatus" [(ngModel)]="entity.BillStatus">
                 <option value="0">New</option>
                 <option value="1">InProgress</option>
                 <option value="2"> Returned</option>
@@ -88,7 +88,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-offset-3">
+          <div class="table-responsive">            
             <table class="table" *ngIf="orderDetails && orderDetails.length > 0">
               <thead>
                 <tr>

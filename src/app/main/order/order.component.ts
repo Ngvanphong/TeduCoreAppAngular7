@@ -36,7 +36,7 @@ export class OrderComponent implements OnInit {
     this.filterCustomerName = '';
     this.filterEndDate = '';
     this.filterStartDate = '';
-    this.filterbillStatus = '';
+    this.filterbillStatus = '5';
     this.search();
   }
 
