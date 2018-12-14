@@ -94,6 +94,7 @@ export class ProductCategoryComponent implements OnInit {
           this.search();
           this.addEditModal.hide();
           forms.resetForm();
+          this.image.nativeElement.value='';
         }
       });
     }
@@ -103,6 +104,7 @@ export class ProductCategoryComponent implements OnInit {
           this.search();
           this.addEditModal.hide();
           forms.resetForm();
+          this.image.nativeElement.value='';
         }
       });
     }

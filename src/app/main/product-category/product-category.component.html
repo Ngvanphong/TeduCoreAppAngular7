@@ -72,8 +72,7 @@
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Thứ tự</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
-              <input type="number" #displayOrder="ngModel" [(ngModel)]="entity.SortOrder" required name="displayOrder" class="form-control"
-              />
+              <input type="number" #displayOrder="ngModel" [(ngModel)]="entity.SortOrder" required name="displayOrder" class="form-control"/>
               <small [hidden]="displayOrder.valid || (displayOrder.pristine && !addEditForm.submitted)" class="text-danger">
                 Bạn phải nhập thứ tự
               </small>
@@ -83,8 +82,8 @@
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Thứ tự trang chủ</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
               <input type="number" #homeOrder="ngModel" [(ngModel)]="entity.HomeOrder" required name="homeOrder" class="form-control" />
-              <small [hidden]="homeOrder.valid || (displayOrder.pristine && !addEditForm.submitted)" class="text-danger">
-                Bạn phải nhập thứ tự
+              <small [hidden]="homeOrder.valid || (homeOrder.pristine && !addEditForm.submitted)" class="text-danger">
+                Bạn phải nhập thứ tự hiện thị trang chủ
               </small>
             </div>
           </div>    
