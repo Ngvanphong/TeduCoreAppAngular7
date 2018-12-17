@@ -4,7 +4,8 @@ import { NotificationService } from '../../core/service/notification.service';
 import { NgForm } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap';
 import { SystemConstant } from '../../core/common/system.constant';
-import { UploadService } from '../../core/service/upload.service'
+import { UploadService } from '../../core/service/upload.service';
+import {MessageConstant} from '../../core/common/message.constant';
 
 @Component({
   selector: 'app-advertistment',
@@ -14,24 +15,32 @@ import { UploadService } from '../../core/service/upload.service'
 export class AdvertistmentComponent implements OnInit {
 
   @ViewChild('modalAddEdit') addEditModal: ModalDirective;
-  @ViewChild('iamge') image;
+  @ViewChild('modalAddEditPage') addEditModalPage: ModalDirective;
+  @ViewChild('modalAddEditPosition') addEditModalPosition: ModalDirective;
+  @ViewChild('image') image;
   public pageIndex: number = 1;
   public pageSize: number = 10;
   public pageDisplay: number = 10;
   public filter: string = '';
   public totalRow: number;
   public entity: any;
+  public entityPage:any;
+  public entityPosition:any;
   public advertistments: any;
+  public advertistmentPages: any;
+  public advertistmentPositions: any;
   public baseFolder: string = SystemConstant.BASE_API;
-  public pages:any[]=[];
-  public positions:any[]=[];
+ 
 
 
   constructor(private _dataService: DataService, private _notifictionService: NotificationService,
     private _uploadService: UploadService) {}
 
   ngOnInit() {
-    this.search()
+    this.search();
+    this.searchPage();
+    this.searchPosition();
+
   }
 
   pageChanged(event: any): void {
@@ -49,13 +58,45 @@ export class AdvertistmentComponent implements OnInit {
       })
   }
 
+  public searchPage() {
+    this._dataService.get('/api/advertistment/getpage')
+      .subscribe((res: any) => {
+        this.advertistmentPages = res
+      })
+  }
 
-  showAdd() {
-   
+  public searchPosition() {
+    this._dataService.get('/api/advertistment/getposition')
+      .subscribe((res: any) => {
+        this.advertistmentPositions = res
+      })
+  }
+
+
+  showAdd() {  
     this.entity = { Status: true };
     this.addEditModal.show();
-
   }
+  showAddPage() { 
+    this.entityPage = { };    
+    this.addEditModalPage.show();
+  }
+  showAddPosition() {  
+    this.entityPosition = { };     
+    this.addEditModalPosition.show();
+  }
+
+  public editAdvertistmentModal(id:string){
+    this.loadDetail(id);
+    this.addEditModal.show();
+  }
+
+  private loadDetail(id:string){
+    this._dataService.get("/api/advertistment/detail/"+id).subscribe((res)=>{
+      this.entity=res;
+    })
+  }
+
 
   saveChange(form: NgForm) {
     if (form.valid) {
@@ -71,6 +112,24 @@ export class AdvertistmentComponent implements OnInit {
       else {
         this.saveData(form);
       }
+    }
+  }
+
+  saveChangePage(valid :boolean){
+    if(valid){
+      this._dataService.post("/api/advertistment/addpage",JSON.stringify(this.entityPage)).subscribe((res:any)=>{
+        this.searchPage();
+        this.addEditModalPage.hide();
+      })
+    }
+  }
+
+  saveChangePosition(valid :boolean){
+    if(valid){
+      this._dataService.post("/api/advertistment/addposition",JSON.stringify(this.entityPosition)).subscribe((res:any)=>{
+        this.searchPosition();
+        this.addEditModalPosition.hide();
+      })
     }
   }
 
@@ -97,7 +156,29 @@ export class AdvertistmentComponent implements OnInit {
     }
   }
 
+  public deleteAdvertistmentPage(id:string){
+    this._notifictionService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG,()=>{
+      this._dataService.delete("/api/advertistment/deletePage","id",id).subscribe((res)=>{
+        this.searchPage();
+      });
+    })  
+  }
 
+  public deleteAdvertistmentPosition(id:string){
+    this._notifictionService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG,()=>{
+      this._dataService.delete("/api/advertistment/deletePosition","id",id).subscribe((res)=>{
+        this.searchPosition();
+      });
+    })  
+  }
+
+  public deleteAdvertistment(id:string){
+    this._notifictionService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG,()=>{
+      this._dataService.delete("/api/advertistment/delete","id",id).subscribe((res)=>{
+        this.search();
+      });
+    }) 
+  }
 
 
 }

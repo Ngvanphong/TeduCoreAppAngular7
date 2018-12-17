@@ -55,6 +55,67 @@
       </div>
     </div>
   </div>
+
+  <div class="col-lg-3 grid-margin stretch-card">
+    <div class="card">
+      <div class="form-group">
+        <button  class="btn btn-success btn-fw" (click)="showAddPage()">Thêm mới </button>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive" >
+          <table class="table"  *ngIf="advertistmentPages && advertistmentPages.length > 0" >
+            <tr>
+              <th>Id</th>
+              <th>Name</th>            
+              <th>#</th>
+            </tr>
+            <tbody>
+              <tr *ngFor="let advertistmentPage of advertistmentPages">
+                <td>{{advertistmentPage.Id}}</td>
+                <td>{{advertistmentPage.Name}}</td>               
+                <td>                
+                  <button  class="btn btn-danger" (click)="deleteAdvertistmentPage(advertistmentPage.Id)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>      
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3 grid-margin stretch-card">
+    <div class="card">
+      <div class="form-group">
+        <button  class="btn btn-success btn-fw" (click)="showAddPosition()">Thêm mới </button>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive" >
+          <table class="table"  *ngIf="advertistmentPositions && advertistmentPositions.length > 0" >
+            <tr>
+              <th>Id</th>
+              <th>Name</th>            
+              <th>#</th>
+            </tr>
+            <tbody>
+              <tr *ngFor="let advertistmentPosition of advertistmentPositions">
+                <td>{{advertistmentPosition.Id}}</td>
+                <td>{{advertistmentPosition.Name}}</td>               
+                <td>                
+                  <button  class="btn btn-danger" (click)="deleteAdvertistmentPosition(advertistmentPosition.Id)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>      
+      </div>
+    </div>
+  </div>
+
 </div>
 
 
@@ -101,7 +162,7 @@
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Hình ảnh</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="file" required #image name="image" class="form-control">
+              <input type="file" #image name="image" class="form-control">
               <p class="help-block label label-danger"> chỉ hỗ trợ định dạng *.png, *.jpg, *.jpeg </p>
               <input type="hidden" [(ngModel)]="entity.Image" name="imageUrl" />
             </div>
@@ -120,14 +181,14 @@
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Số thứ tự</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
-              <input type="text" #sortOrder="ngModel" [(ngModel)]="entity.SortOrder" required name="sortOrder" class="form-control">           
+              <input type="number" #sortOrder="ngModel" [(ngModel)]="entity.SortOrder" required name="sortOrder" class="form-control">           
             </div>
           </div>  
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Trang</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
               <select required class="form-control" name="page" [(ngModel)]="entity.PageId">               
-                  <option *ngFor="let x of pages" [value]="x.Id">{{x.Name}}</option>
+                  <option *ngFor="let x of advertistmentPages" [value]="x.Id">{{x.Name}}</option>
               </select>
               <input type="hidden" [(ngModel)]="entity.PageId" name="page" class="form-control" />
             </div>
@@ -137,7 +198,7 @@
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Vị trí</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
               <select required class="form-control" name="position" [(ngModel)]="entity.PositionId">               
-                  <option *ngFor="let x of positions" [value]="x.Id">{{x.Name}}</option>
+                  <option *ngFor="let x of advertistmentPositions" [value]="x.Id">{{x.Name}}</option>
               </select>
               <input type="hidden" [(ngModel)]="entity.PositionId" name="position" class="form-control" />
             </div>
@@ -155,3 +216,85 @@
     </div>
   </div>
 </div>
+
+<!--this is a modal advertistmentPage-->
+<div bsModal #modalAddEditPage="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true" [config]="{backdrop: 'static'}">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Thêm Advertistment Page</h4>
+        <button type="button" class="close pull-right" (click)="modalAddEditPage.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal form-label-left" novalidate #addEditFormPage="ngForm" (ngSubmit)="saveChangePage(addEditFormPage.valid)"
+          *ngIf="entityPage">       
+          <div class="form-group row">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Id</label>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <input type="text" #idPage="ngModel" [(ngModel)]="entityPage.Id" required name="idPage" class="form-control">           
+            </div>
+          </div>    
+          <div class="form-group row">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Name</label>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <input type="text" #pageName="ngModel" [(ngModel)]="entityPage.Name" required name="pageName" class="form-control">           
+            </div>
+          </div>                                                           
+          <div class="ln_solid"></div>
+          <div class="form-group row">
+            <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-3">
+              <button type="submit" class="btn btn-success mr-2" [disabled]="!addEditFormPage.form.valid">Cập nhật</button>
+              <button type="button" (click)="modalAddEditPage.hide()" class="btn btn-primary">Hủy bỏ</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--this is a modal advertistmentPosition-->
+<div bsModal #modalAddEditPosition="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true" [config]="{backdrop: 'static'}">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Thêm Advertistment Position</h4>
+        <button type="button" class="close pull-right" (click)="modalAddEditPosition.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal form-label-left" novalidate #addEditFormPosition="ngForm" (ngSubmit)="saveChangePosition(addEditFormPosition.valid)"
+          *ngIf="entityPage">       
+          <div class="form-group row">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Id</label>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <input type="text" #idPosition="ngModel" [(ngModel)]="entityPosition.Id" required name="idPosition" class="form-control">           
+            </div>
+          </div>    
+          <div class="form-group row">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Name</label>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <input type="text" #positionName="ngModel" [(ngModel)]="entityPosition.Name" required name="positionName" class="form-control">           
+            </div>
+          </div>                                                           
+          <div class="ln_solid"></div>
+          <div class="form-group row">
+            <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-3">
+              <button type="submit" class="btn btn-success mr-2" [disabled]="!addEditFormPosition.form.valid">Cập nhật</button>
+              <button type="button" (click)="modalAddEditPosition.hide()" class="btn btn-primary">Hủy bỏ</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
