@@ -115,15 +115,15 @@
                   <td>{{item.Price | number}},000</td>
                   <td>{{item.Price * item.Quantity | number}},000</td>
                 </tr>
-                <tr>
+                <tr>                  
                   <td colspan="8">
-                    Tổng tiền: {{totalAmount| number}},000VND
+                    Tổng tiền: {{totalAmount| number}},000 VND
                   </td>
                 </tr>
-                <tr *ngIf="entity.TotalPayment">
-                  <td colspan="8">
-                    Tổng tiền cần thanh toán: {{entity.TotalPayment | number}},000VND
-                  </td>
+                <tr *ngIf="entity.TotalMoneyPayment">
+                    <td colspan="8">
+                        Tổng tiền cần thanh toán: {{entity.TotalMoneyPayment | number}},000 VND
+                      </td>                  
                 </tr>
               </tbody>
             </table>

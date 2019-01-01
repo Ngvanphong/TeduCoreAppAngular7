@@ -63,7 +63,7 @@ export class OrderAddComponent implements OnInit {
       this.entity.BillDetails = this.orderDetails;
       this._dataService.post('/api/order/add', JSON.stringify(this.entity)).subscribe((response: any) => {
         if (response != undefined) {
-          this._signalrService.sendAnnoucement(this.entity)
+          this._signalrService.sendAnnoucement(response)
           this.goBack();
         }
       });

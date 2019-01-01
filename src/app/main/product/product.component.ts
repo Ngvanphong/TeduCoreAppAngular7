@@ -396,10 +396,11 @@ export class ProductComponent implements OnInit {
   }
 
  public updateWholePrice(id:string,productId:string,fromQuantity:string,toQuantity:string,price:number){
+   
     let prama={
         Id:id,
         ProductId:productId,
-        FromQuantity:fromQuantity,
+        FromQuantity:fromQuantity,       
         ToQuantity:toQuantity,
         Price:price,
     }
@@ -409,6 +410,9 @@ export class ProductComponent implements OnInit {
 
   public saveProductWholePrice(valid:boolean){
     if(valid){
+      if(this.wholePriceEntity.ToQuantity==null||this.wholePriceEntity.ToQuantity==undefined||this.wholePriceEntity.ToQuantity==""){
+        this.wholePriceEntity.ToQuantity=1000;
+       }
       this._dataService.post("/api/wholePrice/add",this.wholePriceEntity).subscribe((res=>{
         if(res!=undefined){
           this.loadWholePrice(this.wholePriceEntity.ProductId)
