@@ -75,7 +75,7 @@
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
-              <input type="hidden" [(ngModel)]="entity.ID" name="id" />
+              <input type="hidden" [(ngModel)]="entity.Id" name="id" />
               <input type="text" #name="ngModel" [(ngModel)]="entity.Name" required minlength="3" name="name"
                 class="form-control" />
               <small [hidden]="name.valid || (name.pristine && !addEditForm.submitted)" class="text-danger">

@@ -85,7 +85,7 @@ export class ProductComponent implements OnInit {
   public reset() {
     this.filterKeyword = '';
     this.filterHotPromotion = '';
-    this.filterCategoryId = null;
+    this.filterCategoryId = '';
     this.search();
   }
 
