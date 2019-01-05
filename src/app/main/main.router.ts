@@ -17,6 +17,7 @@ export const mainRouter:Routes=[
     {path:'order/detail/:id',loadChildren:'./order-detail/order-detail.module#OrderDetailModule'},  
     {path:'advertistment',loadChildren:'./advertistment/advertistment.module#AdvertistmentModule'},   
     {path:'contact',loadChildren:'./contact/contact.module#ContactModule'}, 
+    {path:'page',loadChildren:'./page/page.module#PageModule'}, 
 ]},
 
 ]
