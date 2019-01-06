@@ -18,6 +18,7 @@ export const mainRouter:Routes=[
     {path:'advertistment',loadChildren:'./advertistment/advertistment.module#AdvertistmentModule'},   
     {path:'contact',loadChildren:'./contact/contact.module#ContactModule'}, 
     {path:'page',loadChildren:'./page/page.module#PageModule'}, 
+    {path:'pantner',loadChildren:'./logopantner/logopantner.module#LogopantnerModule'}, 
 ]},
 
 ]
