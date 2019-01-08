@@ -4,7 +4,8 @@ import { OrderComponent } from './order.component';
 import {FormsModule} from '@angular/forms';
 import{Routes,RouterModule} from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap';
-import { PaginationModule } from 'ngx-bootstrap';
+import { PaginationModule,ModalModule } from 'ngx-bootstrap';
+
 
 const orderRouter:Routes=[
   {path:'',redirectTo:'index',pathMatch:'full'},
@@ -18,6 +19,7 @@ const orderRouter:Routes=[
     RouterModule.forChild(orderRouter),  
     BsDatepickerModule.forRoot(), 
     PaginationModule.forRoot(), 
+    ModalModule.forRoot(),
   ],
   declarations: [OrderComponent]
 })

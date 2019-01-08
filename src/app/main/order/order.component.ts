@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import {DataService} from '../../core/service/data.service';
 import {NotificationService} from '../../core/service/notification.service';
 import {MessageConstant} from '../../core/common/message.constant';
+import {ModalDirective} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-order',
@@ -18,6 +19,17 @@ export class OrderComponent implements OnInit {
   public filterbillStatus: string = '5';
   public filterEndDate: string = '';
   public orders: any[]=[];
+  public entity:any={};
+  public _billStats:any[]=
+  [
+    {Id:0,Name:"Mới"},
+    {Id:1,Name:"Đang giao"},
+    {Id:2,Name:"Trả về"},
+    {Id:3,Name:"Hủy"},
+    {Id:4,Name:"Thành công"},  
+  ];
+
+  @ViewChild('addEditModal') private addEditModal: ModalDirective;
     
   constructor(private _dataService:DataService,private _notificationService:NotificationService) { 
     
@@ -59,5 +71,22 @@ export class OrderComponent implements OnInit {
       });
     });
   }
+
+ public updateBillStatus(id:string){
+   this.loadDetailBill(id)
+   this.addEditModal.show();
+ }
+ private loadDetailBill(id:string){
+  this._dataService.get('/api/order/detail/' + id).subscribe((response: any) => {
+    this.entity = response;   
+  });
+ }
+
+ public saveChanges(){
+   this._dataService.put('/api/order/update',this.entity).subscribe((res:any)=>{
+     this.search();
+     this.addEditModal.hide();
+   })
+ }
 
 }

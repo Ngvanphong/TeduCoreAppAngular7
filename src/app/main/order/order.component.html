@@ -15,11 +15,11 @@
   <div class="col-md-2 col-sm-2 col-xs-12 form-group ">
     <select class="form-control" #billStatus="ngModel" name="billStatus" [(ngModel)]="filterbillStatus">
       <option value="5">Tất cả</option>
-      <option value="0">New</option>
-      <option value="1">InProgress</option>
-      <option value="2"> Returned</option>
-      <option value="3">Cancelled</option>
-      <option value="4">Completed</option>
+      <option value="0">Mới</option>
+      <option value="1">Đang giao</option>
+      <option value="2">Trả về</option>
+      <option value="3">Hủy</option>
+      <option value="4">Thành công</option>
     </select>
   </div>
   <div class="col-md-4 col-sm-3 col-xs-12 form-group">
@@ -40,6 +40,7 @@
               <th>Tên khách hàng</th>
               <th>Số điện thoại</th>
               <th>Ngày tạo</th>
+              <th>Tình trạng</th>
               <th>Trạng thái</th>
               <th>#</th>
             </tr>
@@ -48,11 +49,19 @@
                 <td>{{item.CustomerName}}</td>
                 <td>{{item.CustomerMobile}}</td>
                 <td>{{item.DateCreated | date}}</td>
+
+                <td *ngIf="item.BillStatus==0"><i class="fa fa-file-o"></i> Mới</td>
+                <td *ngIf="item.BillStatus==1"><i class="fa fa-plane"></i> Đang giao</td>
+                <td *ngIf="item.BillStatus==2"><i class="fa fa-retweet"></i> Trả về</td>
+                <td *ngIf="item.BillStatus==3"><i class="fa fa-trash-o"></i> Hủy</td>
+                <td *ngIf="item.BillStatus==4"><i class="fa fa-check-square-o"></i> Thành công</td>
+                
                 <td *ngIf="item.Status==0"><i class="fa fa-exclamation-triangle"></i>Không hợp lệ</td>
                 <td *ngIf="item.Status==1"><i class="fa fa-check-square-o"></i>Hợp lệ</td>
                 <td>
-                  <a class="btn btn-primary mr-2"  routerLink="/main/order/detail/{{item.Id}}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                  <button class="btn btn-danger" (click)="delete(item.Id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  <a class="btn btn-primary mr-2" title="Chi tiết"  routerLink="/main/order/detail/{{item.Id}}"> <i class="fa fa-bandcamp" aria-hidden="true"></i></a>
+                  <button *ngIf="item.BillStatus!=2&&item.BillStatus!=3" class="btn btn-default mr-2" title="Cập nhật tình trạng" (click)="updateBillStatus(item.Id)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                  <button class="btn btn-danger" title="Xóa" (click)="delete(item.Id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </td>
               </tr>  
             </tbody>
@@ -68,5 +77,43 @@
     </div>
   </div>
 </div>
+
+<!-- Model update BillStatus -->
+
+<div bsModal #addEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true" [config]="{backdrop: 'static'}">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Cập nhật trạng thái đơn hàng</h4>
+        <button type="button" class="close pull-right" (click)="addEditModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal form-label-left input_mask" novalidate #addEditForm="ngForm" (ngSubmit)="saveChanges()"
+          *ngIf="entity">
+          <div class="form-group row">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
+            <div class="col-md-10 col-sm-10 col-xs-12">            
+              <select class="form-control" name="billStatus" [(ngModel)]="entity.BillStatus">              
+                <option *ngFor="let x of _billStats" [value]="x.Id">{{x.Name}}</option>
+              </select>
+              <input type="hidden" [(ngModel)]="entity.BillStatus" name="billStatus" class="form-control" />
+            </div>
+          </div>                   
+          <div class="ln_solid"></div>
+          <div class="form-group row">
+            <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-3">             
+              <button type="submit" class="btn btn-success  mr-2">Cập nhật</button>
+              <button type="button" (click)="addEditModal.hide()" class="btn btn-danger">Hủy bỏ</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 

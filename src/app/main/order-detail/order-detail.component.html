@@ -76,11 +76,11 @@
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái thanh toán</label>
             <div class="col-md-10 col-sm-10 col-xs-12 ">
               <select disabled class="form-control" #billStatus="ngModel" name="billStatus" [(ngModel)]="entity.BillStatus">
-                <option value="0">New</option>
-                <option value="1">InProgress</option>
-                <option value="2"> Returned</option>
-                <option value="3">Cancelled</option>
-                <option value="4">Completed</option>
+                <option value="0">Mới</option>
+                <option value="1">Đang giao</option>
+                <option value="2">Trả về</option>
+                <option value="3">Hủy</option>
+                <option value="4">Thành công</option>
               </select>
             </div>
           </div>
@@ -122,8 +122,11 @@
                   <td>{{item.Price * item.Quantity | number}},000</td>
                 </tr>
                 <tr>
-                  <td colspan="8">
+                  <td title="Admin thêm" colspan="8" *ngIf="entity.TotalMoneyOrder == undefined">
                     Tổng tiền: {{totalAmount| number}},000 VND
+                  </td>
+                  <td title="Khách hàng đặt" colspan="8" *ngIf="entity.TotalMoneyOrder != undefined">
+                    Tổng tiền: {{entity.TotalMoneyOrder| number}},000 VND
                   </td>
                 </tr>
                 <tr *ngIf="entity.TotalMoneyPayment != undefined">
