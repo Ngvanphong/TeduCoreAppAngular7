@@ -19,6 +19,12 @@
             </div>
           </div>
           <div class="form-group row">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Id khách hàng</label>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <input disabled type="text" #customerId="ngModel" [(ngModel)]="entity.CustomerId" name="customerId" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Địa chỉ </label>
             <div class="col-md-10 col-sm-10 col-xs-12">
               <textarea disabled class="form-control" #customerAddress="ngModel" [(ngModel)]="entity.CustomerAddress"
@@ -88,7 +94,7 @@
               </div>
             </div>
           </div>
-          <div class="table-responsive">            
+          <div class="table-responsive">
             <table class="table" *ngIf="orderDetails && orderDetails.length > 0">
               <thead>
                 <tr>
@@ -115,15 +121,15 @@
                   <td>{{item.Price | number}},000</td>
                   <td>{{item.Price * item.Quantity | number}},000</td>
                 </tr>
-                <tr>                  
+                <tr>
                   <td colspan="8">
                     Tổng tiền: {{totalAmount| number}},000 VND
                   </td>
                 </tr>
-                <tr *ngIf="entity.TotalMoneyPayment">
-                    <td colspan="8">
-                        Tổng tiền cần thanh toán: {{entity.TotalMoneyPayment | number}},000 VND
-                      </td>                  
+                <tr *ngIf="entity.TotalMoneyPayment != undefined">
+                  <td colspan="8">
+                    Tổng tiền cần thanh toán: {{entity.TotalMoneyPayment | number}},000 VND
+                  </td>
                 </tr>
               </tbody>
             </table>

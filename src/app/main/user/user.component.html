@@ -11,7 +11,8 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="form-group">
-        <button *ngIf="_authenService.hasPermission('USER','create')" class="btn btn-success btn-fw" (click)="showAdd()">Thêm mới</button>
+        <button *ngIf="_authenService.hasPermission('USER','create')" class="btn btn-success btn-fw" (click)="showAdd()">Thêm
+          mới</button>
       </div>
       <div class="card-body">
         <div class="table-responsive" *ngIf="users && users.length > 0">
@@ -19,6 +20,7 @@
             <tr>
               <th>Tài khoản</th>
               <th>Họ tên</th>
+              <th>Tiền dư</th>
               <th>Email</th>
               <th>Ngày sinh</th>
               <th>Số điện thoại</th>
@@ -30,6 +32,7 @@
               <tr *ngFor="let user of users">
                 <td>{{user.UserName}}</td>
                 <td>{{user.FullName}}</td>
+                <td>{{user.Balance}}</td>
                 <td>{{user.Email}}</td>
                 <td>{{user.BirthDay | date:'dd/MM/yyyy'}}</td>
                 <td>{{user.PhoneNumber}}</td>
@@ -75,7 +78,9 @@
       <div class="modal-body">
         <form class="form-horizontal form-label-left" novalidate #addEditForm="ngForm" (ngSubmit)="saveChange(addEditForm)"
           *ngIf="entity">
-
+          <div class="form-group row"> 
+            <input disabled class="col-md-12 col-sm-12 col-xs-12" [(ngModel)]="entity.Id" name="id" />
+          </div>
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Họ tên</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
@@ -85,7 +90,6 @@
               </small>
             </div>
           </div>
-
           <div class="form-group row">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Tài khoản</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
@@ -93,6 +97,12 @@
               <small [hidden]="username.valid || (username.pristine && !addEditForm.submitted)" class="text-danger">
                 Bạn phải nhập tài khoản
               </small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Số dư tài khoản</label>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <input type="number" #balance="ngModel" [(ngModel)]="entity.Balance" name="balance" class="form-control">
             </div>
           </div>
           <div class="form-group row" *ngIf="!entity.Id">
@@ -164,7 +174,8 @@
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái</label>
             <div class="col-md-10 col-sm-10 col-xs-12 ">
               <label>
-                <input type="checkbox" [(ngModel)]="entity.Status" [name]="Status" name="status" [ngModelOptions]="{standalone: true}"> Kích hoạt
+                <input type="checkbox" [(ngModel)]="entity.Status" [name]="Status" name="status" [ngModelOptions]="{standalone: true}">
+                Kích hoạt
               </label>
             </div>
           </div>
