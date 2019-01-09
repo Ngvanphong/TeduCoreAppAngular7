@@ -19,6 +19,8 @@ export const mainRouter:Routes=[
     {path:'contact',loadChildren:'./contact/contact.module#ContactModule'}, 
     {path:'page',loadChildren:'./page/page.module#PageModule'}, 
     {path:'pantner',loadChildren:'./logopantner/logopantner.module#LogopantnerModule'}, 
+    {path:'tag',loadChildren:'./tag/tag.module#TagModule'}, 
+    {path:'systemconfig',loadChildren:'./system-config/system-config.module#SystemConfigModule'}, 
 ]},
 
 ]
