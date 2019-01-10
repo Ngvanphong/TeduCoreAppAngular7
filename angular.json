@@ -52,7 +52,8 @@
               "node_modules/tinymce/plugins/preview/plugin.js",
               "node_modules/tinymce/plugins/wordcount/plugin.js",
               "node_modules/tinymce/plugins/textcolor/plugin.js",
-              "node_modules/tinymce/plugins/autoresize/plugin.js"                 
+              "node_modules/tinymce/plugins/autoresize/plugin.js"
+                          
             ]
           },
           "configurations": {
