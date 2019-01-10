@@ -128,6 +128,7 @@ export class UserComponent implements OnInit {
   }
 
   private saveData(form:NgForm){
+    this.entity.BirthDay=moment(this.entity.BirthDay).format('MM/DD/YYYY');
     if (this.entity.Id == undefined) {
       this._dataService.post("/api/appUser/add", JSON.stringify(this.entity)).subscribe((res: any) => {
         if(res!=null){

@@ -50,8 +50,9 @@ export class SystemConfigComponent implements OnInit {
     this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => this.deleteConfirm(id))
   }
 
-  public saveChanges(form: NgForm) {
+  public saveChanges(form: NgForm) {  
     if (form.valid) {
+      this.entity.Value4 = moment(this.entity.Value4).format("MM/DD/YYYY");
       if (this.flagAdd == true) {
         this._dataService.post("/api/systemconfig/add", JSON.stringify(this.entity)).subscribe((res: any) => {
           this.search();
