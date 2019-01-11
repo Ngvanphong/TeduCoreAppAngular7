@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../core/service/data.service'
+import { DataService } from '../../core/service/data.service';
+import {AuthenService} from '../../core/service/authen.service';
+import {SystemConstant} from '../../core/common/system.constant'
 @Component({
   selector: 'app-sidebar-menu',
   templateUrl: './sidebar-menu.component.html',
@@ -7,7 +9,9 @@ import { DataService } from '../../core/service/data.service'
 })
 export class SidebarMenuComponent implements OnInit {
   public functions: any[];
-  constructor(private _dataService: DataService) { }
+  public userLogin:any;
+  public baseFolder:string=SystemConstant.BASE_API;
+  constructor(private _dataService: DataService,private _authenService:AuthenService) { }
 
   ngOnInit() {
     this._dataService.get('/api/Function/getlisthierarchy').subscribe((response: any[]) => {
@@ -19,11 +23,15 @@ export class SidebarMenuComponent implements OnInit {
             return -1;
           return 0;
         });
-      }
-    
-      
-    })
+      }       
+    });
+    this.getUser();
   }
+
+  private getUser(){
+   this.userLogin= this._authenService.getUserLogin()
+  }
+
 
 
 }
