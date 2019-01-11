@@ -9,10 +9,12 @@
 <div class="col-md-2 col-sm-2 col-xs-12 form-group ">
   <input type="text" name="endDate" #dp="bsDatepicker" [ngModelOptions]="{standalone: true}" bsDatepicker [(ngModel)]="toDate" class="form-control" placeholder="Đến ngày">
 </div>
-
-<div class="col-md-4 col-sm-3 col-xs-12 form-group">
+<div class="col-md-2 col-sm-3 col-xs-12 form-group">
   <button class="btn btn-primary mr-2" type="button" (click)="loadRevenues()">Cập nhật</button>
-  
+</div>
+<div class="col-md-6 col-sm-2 col-xs-12 " >
+  <label> Tổng doanh thu:<strong>  {{totalRevenue | number}},000 VND | </strong> </label>
+  <label> Tổng lợi nhuận:<strong> {{totalProfif| number}},000 VND</strong> </label>         
 </div>
 <div class="clearfix"></div>
 </div>
@@ -21,14 +23,14 @@
   <div class="col-md-7">
     <div >
       <canvas id="canvas" height="200">{{ chart }}</canvas>
-    </div>
+    </div>     
   </div>
   <div class="col-md-5" style="margin-bottom: 10px">
     <table  class="table table-responsive table-condensed">
       <tr>
         <th>Ngày</th>
-        <th>Doanh thu</th>
-        <th>Lợi nhuận</th>
+        <th><label style="background:#ffcc00">Doanh thu</label> </th>
+        <th><label style="background:#3cba9f">Lợi nhuận</label> </th>
       </tr>
       <tr *ngFor="let item of tableData">
         <td>{{item.Date | date:'MM/dd/yyyy'}}</td>
