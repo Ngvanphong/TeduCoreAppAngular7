@@ -21,7 +21,8 @@ export const mainRouter:Routes=[
     {path:'pantner',loadChildren:'./logopantner/logopantner.module#LogopantnerModule'}, 
     {path:'tag',loadChildren:'./tag/tag.module#TagModule'}, 
     {path:'systemconfig',loadChildren:'./system-config/system-config.module#SystemConfigModule'}, 
-    {path:'revenue',loadChildren:'./revenue/revenue.module#RevenueModule'}, 
+    {path:'revenue',loadChildren:'./revenue/revenue.module#RevenueModule'},
+    {path:'sendemail',loadChildren:'./send-email/send-email.module#SendEmailModule'},  
 ]},
 
 ]
