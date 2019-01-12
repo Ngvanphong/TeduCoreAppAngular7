@@ -11,7 +11,7 @@
         <form class="form-horizontal form-label-left input_mask" novalidate #addEditForm="ngForm" (ngSubmit)="saveChanges(addEditForm.valid)"
           *ngIf="entity">
           <div class="form-group row">
-            <label class="control-label col-md-2 col-sm-2 col-xs-12">Tài khoản</label>
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên tài khoản</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
               <input type="text" #username="ngModel" [(ngModel)]="entity.UserName" required name="username" class="form-control">
               <small [hidden]="username.valid || (username.pristine && !addEditForm.submitted)" class="text-danger">
