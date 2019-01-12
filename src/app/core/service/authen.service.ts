@@ -44,6 +44,27 @@ export class AuthenService {
     localStorage.removeItem(SystemConstant.CURRENT_USER);
   }
 
+  changePass(userName:string,oldPass:string,newPass:string) {
+    let body ="username=" + encodeURIComponent(userName) + "&oldpass=" + encodeURIComponent(oldPass) + "&newpass=" + encodeURIComponent(newPass)
+    + "&grant_type=password";     
+    let reqHeader = new HttpHeaders({ 
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer ' + this.getUserLogin().access_token
+   });
+  return this._http.post(SystemConstant.BASE_API + '/api/appUser/changepassword', body, { headers: reqHeader })
+    .pipe(      
+      tap(
+        (res: any) => {
+         this._notificationService.printSuccesMessage("Đổi mật khẩu thành công");
+         this.logout();          
+        }
+      ),
+      catchError(
+        this._notificationService.handleError<any>("Account isn't correct")
+      )     
+    );
+  }
+
   isUserAuthenticated(): boolean {
     let user = localStorage.getItem(SystemConstant.CURRENT_USER);
     if (user != null) { return true }

@@ -23,6 +23,7 @@ export const mainRouter:Routes=[
     {path:'systemconfig',loadChildren:'./system-config/system-config.module#SystemConfigModule'}, 
     {path:'revenue',loadChildren:'./revenue/revenue.module#RevenueModule'},
     {path:'sendemail',loadChildren:'./send-email/send-email.module#SendEmailModule'},  
+    {path:'changepass',loadChildren:'./changepass/changepass.module#ChangepassModule'},
 ]},
 
 ]

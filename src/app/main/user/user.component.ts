@@ -27,6 +27,7 @@ export class UserComponent implements OnInit {
   public users: any;
   public roles:any[];
   public baseFolder:string=SystemConstant.BASE_API;
+  public isConfirm:boolean=true;
 
   //dropdown multi
   public dropdownList = [];
@@ -76,12 +77,14 @@ export class UserComponent implements OnInit {
   }
 
   showAdd() {
+    this.isConfirm=true;
     this.selectedItems=[];
     this.addEditModal.show();
     this.entity = {Status:true};
   }
 
   editUserModal(id: any) {
+    this.isConfirm=true;
     this.loadUser(id);
     this.addEditModal.show();
   };
@@ -148,6 +151,15 @@ export class UserComponent implements OnInit {
           this.avatar.nativeElement.value='';
         }   
       })
+    }
+  }
+
+  public ConfirmPass() {
+    if (this.entity.Password == this.entity.ConfirmPassword) {
+      this.isConfirm = true;
+    }
+    else {
+      this.isConfirm = false;
     }
   }
 
