@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../core/service/data.service';
-
+import {AuthenService} from '../../core/service/authen.service';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -9,7 +9,7 @@ import {DataService} from '../../core/service/data.service';
 export class ContactComponent implements OnInit {
   public entity:any={Id:"Default"};
   public flagAdd=true;
-  constructor(private _dataService:DataService) { }
+  constructor(private _dataService:DataService,public _authenService:AuthenService) { }
 
   ngOnInit() {
     this.getContact();

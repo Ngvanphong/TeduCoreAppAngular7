@@ -5,7 +5,7 @@ import { UtilityService } from '../../core/service/utility.service';
 import { NgForm } from '@angular/forms';
 import { NotificationService } from '../../core/service/notification.service';
 import { MessageConstant } from '../../core/common/message.constant';
-
+import {AuthenService} from '../../core/service/authen.service';
 @Component({
   selector: 'app-funtion',
   templateUrl: './funtion.component.html',
@@ -22,7 +22,8 @@ export class FuntionComponent implements OnInit {
   public _permission: any[];
   public functionId: string;
 
-  constructor(private _dataService: DataService, private _utilityService: UtilityService, private _notificationService: NotificationService) { }
+  constructor(private _dataService: DataService, private _utilityService: UtilityService, private _notificationService: NotificationService,
+    public _authenService:AuthenService) { }
 
   ngOnInit() {
     this.search();

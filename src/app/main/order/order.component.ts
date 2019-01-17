@@ -3,7 +3,7 @@ import {DataService} from '../../core/service/data.service';
 import {NotificationService} from '../../core/service/notification.service';
 import {MessageConstant} from '../../core/common/message.constant';
 import {ModalDirective} from 'ngx-bootstrap';
-
+import {AuthenService} from '../../core/service/authen.service';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -31,7 +31,7 @@ export class OrderComponent implements OnInit {
 
   @ViewChild('addEditModal') private addEditModal: ModalDirective;
     
-  constructor(private _dataService:DataService,private _notificationService:NotificationService) { 
+  constructor(private _dataService:DataService,private _notificationService:NotificationService,public _authenService:AuthenService) { 
     
   }
 

@@ -6,6 +6,7 @@ import { UploadService } from '../../core/service/upload.service';
 import { ModalDirective } from 'ngx-bootstrap';
 import { SystemConstant } from '../../core/common/system.constant';
 import { NgForm } from '@angular/forms';
+import {AuthenService} from '../../core/service/authen.service';
 @Component({
   selector: 'app-logopantner',
   templateUrl: './logopantner.component.html',
@@ -19,7 +20,7 @@ export class LogopantnerComponent implements OnInit {
   public pantners: any[] = [];
   public baseFolder: string = SystemConstant.BASE_API;
   constructor(private _dataService: DataService, private _notificationService: NotificationService,
-    private _uploadService: UploadService) { }
+    private _uploadService: UploadService,public _authenService:AuthenService) { }
 
   ngOnInit() {
     this.search();

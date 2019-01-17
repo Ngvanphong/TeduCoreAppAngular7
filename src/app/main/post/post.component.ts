@@ -8,7 +8,7 @@ import {ModalDirective} from 'ngx-bootstrap';
 import {NgForm} from '@angular/forms';
 import {UploadService} from '../../core/service/upload.service';
 import {UtilityService} from '../../core/service/utility.service';
-
+import {AuthenService} from '../../core/service/authen.service';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -30,7 +30,7 @@ export class PostComponent implements OnInit {
   @ViewChild('image') private image;
 
   constructor(private _dataService:DataService,private _notificationService:NotificationService,
-     private _router:Router,private _uploadService:UploadService,private _utilityService:UtilityService) { }
+     private _router:Router,private _uploadService:UploadService,private _utilityService:UtilityService,public _authenService:AuthenService) { }
 
   ngOnInit() {
     this.search();

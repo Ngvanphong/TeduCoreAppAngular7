@@ -25,7 +25,7 @@
   <div class="col-md-4 col-sm-3 col-xs-12 form-group">
     <button class="btn btn-primary mr-2" type="button" (click)="search()">Tìm</button>
     <button class="btn btn-default mr-2" type="button" (click)="reset()">Reset</button>
-    <button class="btn btn-success" routerLink="/main/order/add">Thêm mới</button>
+    <button class="btn btn-success" *ngIf="_authenService.hasPermission('BILL','create')" routerLink="/main/order/add">Thêm mới</button>
   </div>
   <div class="clearfix"></div>
 </div>
@@ -60,8 +60,8 @@
                 <td *ngIf="item.Status==1"><i class="fa fa-check-square-o"></i>Hợp lệ</td>
                 <td>
                   <a class="btn btn-primary mr-2" title="Chi tiết"  routerLink="/main/order/detail/{{item.Id}}"> <i class="fa fa-bandcamp" aria-hidden="true"></i></a>
-                  <button *ngIf="item.BillStatus!=2&&item.BillStatus!=3" class="btn btn-default mr-2" title="Cập nhật tình trạng" (click)="updateBillStatus(item.Id)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                  <button class="btn btn-danger" title="Xóa" (click)="delete(item.Id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  <button *ngIf="item.BillStatus!=2&&item.BillStatus!=3&&_authenService.hasPermission('BILL','update')" class="btn btn-default mr-2" title="Cập nhật tình trạng" (click)="updateBillStatus(item.Id)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                  <button class="btn btn-danger" *ngIf="_authenService.hasPermission('BILL','delete')" title="Xóa" (click)="delete(item.Id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </td>
               </tr>  
             </tbody>

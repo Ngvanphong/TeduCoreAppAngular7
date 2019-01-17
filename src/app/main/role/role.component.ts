@@ -4,7 +4,7 @@ import { DataService } from '../../core/service/data.service';
 import {NotificationService} from '../../core/service/notification.service';
 import {MessageConstant} from '../../core/common/message.constant';
 import {NgForm} from '@angular/forms';
-
+import {AuthenService} from '../../core/service/authen.service';
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html',
@@ -21,7 +21,7 @@ export class RoleComponent implements OnInit {
   public entity: any;
   public roles: any;
 
-  constructor(private _dataService: DataService, private _notificationService:NotificationService) { }
+  constructor(private _dataService: DataService, private _notificationService:NotificationService,public _authenService:AuthenService) { }
 
   ngOnInit() {
     this.search();

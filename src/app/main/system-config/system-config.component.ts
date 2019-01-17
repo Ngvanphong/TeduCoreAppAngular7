@@ -4,6 +4,7 @@ import { NotificationService } from '../../core/service/notification.service';
 import { MessageConstant } from '../../core/common/message.constant';
 import { ModalDirective } from 'ngx-bootstrap';
 import { NgForm } from '@angular/forms';
+import {AuthenService} from '../../core/service/authen.service';
 declare var moment: any;
 @Component({
   selector: 'app-system-config',
@@ -16,7 +17,7 @@ export class SystemConfigComponent implements OnInit {
   public entity: any;
   public flagAdd = true;
   public systemConfigs: any[];
-  constructor(private _dataService: DataService, private _notificationService: NotificationService) { }
+  constructor(private _dataService: DataService, private _notificationService: NotificationService,public _authenService:AuthenService) { }
 
   ngOnInit() {
     this.search()

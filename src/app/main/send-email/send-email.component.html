@@ -4,7 +4,7 @@
 </div>
 <div class="col-md-12 row">
   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-    <button class="btn btn-success" (click)="showAdd()">Viết mail</button>
+    <button class="btn btn-success" *ngIf="_authenService.checkAccess('USER')" (click)="showAdd()">Viết mail</button>
   </div>
   <div class="clearfix"></div>
 </div>

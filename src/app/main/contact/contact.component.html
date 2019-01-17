@@ -75,7 +75,7 @@
           </div>
           <div class="ln_solid"></div>
           <div class="form-group">
-            <button [disabled]="!addEditForm.valid" class="btn btn-success btn-fw" type="submit">Cập nhật</button>
+            <button *ngIf="_authenService.hasPermission('CONTACT','create')||_authenService.hasPermission('CONTACT','update')" [disabled]="!addEditForm.valid" class="btn btn-success btn-fw" type="submit">Cập nhật</button>
           </div>
         </form>
       </div>

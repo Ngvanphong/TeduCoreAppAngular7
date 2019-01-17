@@ -11,7 +11,7 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="form-group">
-        <button class="btn btn-success btn-fw" (click)="showAdd()">Thêm mới</button>
+        <button class="btn btn-success btn-fw" *ngIf="_authenService.hasPermission('ROLE','create')" (click)="showAdd()">Thêm mới</button>
       </div>
       <div class="card-body">
         <div class="table-responsive" *ngIf="roles && roles.length > 0">
@@ -26,10 +26,10 @@
                 <td>{{role.Name}}</td>
                 <td>{{role.Description}}</td>
                 <td>
-                  <button *ngIf="role.Name!='Admin'" class="btn btn-primary mr-2" (click)="editRoleModal(role.Id)">
+                  <button *ngIf="role.Name!='Admin'&&_authenService.hasPermission('ROLE','update') " class="btn btn-primary mr-2" (click)="editRoleModal(role.Id)">
                     <i class="fa fa-pencil-square-o"></i>
                   </button>
-                  <button  *ngIf="role.Name!='Admin'" class="btn btn-danger" (click)="deleteRole(role.Id)">
+                  <button  *ngIf="role.Name!='Admin'&&_authenService.hasPermission('ROLE','delete')"  class="btn btn-danger" (click)="deleteRole(role.Id)">
                     <i class="fa fa-trash"></i>
                   </button>
                 </td>

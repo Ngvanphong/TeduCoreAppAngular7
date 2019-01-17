@@ -7,6 +7,7 @@ import { NotificationService } from '../../core/service/notification.service';
 import { MessageConstant } from '../../core/common/message.constant';
 import { NgForm } from '@angular/forms';
 import { UploadService } from '../../core/service/upload.service';
+import {AuthenService} from '../../core/service/authen.service';
 declare const tinymce: any;
 
 @Component({
@@ -58,7 +59,7 @@ export class ProductComponent implements OnInit {
   @ViewChild('wholePriceModal') private wholePriceModal:ModalDirective;
 
   constructor(private _utilityService: UtilityService, private _dataService: DataService,
-    private _notificationService: NotificationService, private _uploadService: UploadService) { }
+    private _notificationService: NotificationService, private _uploadService: UploadService,public _authenService:AuthenService) { }
 
   ngOnInit() {
     this.search();

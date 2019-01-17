@@ -8,7 +8,7 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="form-group">
-        <button class="btn btn-success btn-fw" (click)="showAdd()">Thêm mới</button>
+        <button class="btn btn-success btn-fw" *ngIf="_authenService.hasPermission('SYSTEMCONFIG','create')" (click)="showAdd()">Thêm mới</button>
       </div>
       <div class="card-body">
         <div class="table-responsive" *ngIf="systemConfigs && systemConfigs.length > 0">
@@ -34,8 +34,8 @@
                 <td *ngIf="item.Status==0"><i class="fa fa-exclamation-triangle"></i>Bị khóa</td>
                 <td *ngIf="item.Status==1"><i class="fa fa-check-square-o"></i>Kích hoạt</td>
                 <td>
-                  <button class="btn btn-primary mr-2" (click)="editSystemModal(item.Id)"> <i class="fa fa-pencil-square-o"></i></button>
-                  <button class="btn btn-danger" (click)="deleteSystem(item.Id)"> <i class="fa fa-trash"></i></button>
+                  <button class="btn btn-primary mr-2" *ngIf="_authenService.hasPermission('SYSTEMCONFIG','update')" (click)="editSystemModal(item.Id)"> <i class="fa fa-pencil-square-o"></i></button>
+                  <button class="btn btn-danger" *ngIf="_authenService.hasPermission('SYSTEMCONFIG','delete')" (click)="deleteSystem(item.Id)"> <i class="fa fa-trash"></i></button>
                 </td>
               </tr>
             </tbody>

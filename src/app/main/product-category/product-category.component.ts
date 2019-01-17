@@ -8,7 +8,7 @@ import { MessageConstant } from '../../core/common/message.constant';
 import { NgForm } from '@angular/forms';
 import { UploadService } from '../../core/service/upload.service';
 import {SystemConstant} from '../../core/common/system.constant';
-
+import {AuthenService} from '../../core/service/authen.service';
 @Component({
   selector: 'app-product-category',
   templateUrl: './product-category.component.html',
@@ -28,7 +28,7 @@ export class ProductCategoryComponent implements OnInit {
   public _productCategories: any[];
 
   constructor(private _dataService: DataService, private _utilityService: UtilityService,
-    private _notificationService: NotificationService, private _uploadService: UploadService) { }
+    private _notificationService: NotificationService, private _uploadService: UploadService,public _authenService:AuthenService) { }
 
   ngOnInit() {
     this.search();

@@ -3,7 +3,7 @@ import { DataService } from '../../core/service/data.service';
 import { NotificationService } from '../../core/service/notification.service';
 import { ModalDirective } from 'ngx-bootstrap';
 import { MessageConstant } from '../../core/common/message.constant';
-
+import {AuthenService} from '../../core/service/authen.service';
 @Component({
   selector: 'app-send-email',
   templateUrl: './send-email.component.html',
@@ -19,7 +19,7 @@ export class SendEmailComponent implements OnInit {
   public disableSuccess:boolean;
   @ViewChild('addEditModal') private addEditModal: ModalDirective;
 
-  constructor(private _dataService: DataService, private _notificationService: NotificationService) { }
+  constructor(private _dataService: DataService, private _notificationService: NotificationService,public _authenService:AuthenService) { }
   ngOnInit() {
     this.search();
   }

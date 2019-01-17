@@ -4,7 +4,7 @@
 </div>
 <div class="col-md-12 row">
   <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-    <button class="btn btn-success" (click)="showAddPage()">Thêm mới</button>
+    <button class="btn btn-success" *ngIf="_authenService.hasPermission('PAGE','create')" (click)="showAddPage()">Thêm mới</button>
   </div>
   <div class="clearfix"></div>
 </div>
@@ -27,9 +27,9 @@
                 <td *ngIf="item.Status==0"><i class="fa fa-exclamation-triangle"></i>Không hợp lệ</td>
                 <td *ngIf="item.Status==1"><i class="fa fa-check-square-o"></i>Hợp lệ</td>
                 <td>
-                  <button class="btn btn-primary mr-2" (click)="showEdit(item.Id)"><i class="fa fa-pencil-square-o"
+                  <button class="btn btn-primary mr-2" *ngIf="_authenService.hasPermission('PAGE','update')" (click)="showEdit(item.Id)"><i class="fa fa-pencil-square-o"
                       aria-hidden="true"></i></button>
-                  <button class="btn btn-danger" (click)="delete(item.Id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  <button class="btn btn-danger" *ngIf="_authenService.hasPermission('PAGE','delete')" (click)="delete(item.Id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </td>
               </tr>
             </tbody>

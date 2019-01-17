@@ -6,6 +6,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { SystemConstant } from '../../core/common/system.constant';
 import { UploadService } from '../../core/service/upload.service';
 import {MessageConstant} from '../../core/common/message.constant';
+import {AuthenService} from '../../core/service/authen.service';
 
 @Component({
   selector: 'app-advertistment',
@@ -34,7 +35,7 @@ export class AdvertistmentComponent implements OnInit {
 
 
   constructor(private _dataService: DataService, private _notifictionService: NotificationService,
-    private _uploadService: UploadService) {}
+    private _uploadService: UploadService,public _authenService:AuthenService) {}
 
   ngOnInit() {
     this.search();

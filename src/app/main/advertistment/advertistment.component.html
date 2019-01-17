@@ -11,7 +11,7 @@
   <div class="col-lg-6 grid-margin stretch-card">
     <div class="card">
       <div class="form-group">
-        <button  class="btn btn-success btn-fw" (click)="showAdd()">Thêm mới </button>
+        <button  class="btn btn-success btn-fw" *ngIf="_authenService.hasPermission('ADVERTISMENT','create')" (click)="showAdd()">Thêm mới </button>
       </div>
       <div class="card-body">
         <div class="table-responsive" >
@@ -35,10 +35,10 @@
                   <img [src]="baseFolder+ advertistment.Image" />
                 </td>
                 <td>
-                  <button class="btn btn-primary mr-2" (click)="editAdvertistmentModal(advertistment.Id)">
+                  <button class="btn btn-primary mr-2" *ngIf="_authenService.hasPermission('ADVERTISMENT','update')" (click)="editAdvertistmentModal(advertistment.Id)">
                     <i class="fa fa-pencil-square-o"></i>
                   </button>
-                  <button  class="btn btn-danger" (click)="deleteAdvertistment(advertistment.Id)">
+                  <button  class="btn btn-danger" *ngIf="_authenService.hasPermission('ADVERTISMENT','delete')" (click)="deleteAdvertistment(advertistment.Id)">
                     <i class="fa fa-trash"></i>
                   </button>
                 </td>
@@ -59,7 +59,7 @@
   <div class="col-lg-3 grid-margin stretch-card">
     <div class="card">
       <div class="form-group">
-        <button  class="btn btn-success btn-fw" (click)="showAddPage()">Thêm mới </button>
+        <button  class="btn btn-success btn-fw" *ngIf="_authenService.hasPermission('ADVERTISMENT','create')" (click)="showAddPage()">Thêm mới </button>
       </div>
       <div class="card-body">
         <div class="table-responsive" >
@@ -74,7 +74,7 @@
                 <td>{{advertistmentPage.Id}}</td>
                 <td>{{advertistmentPage.Name}}</td>               
                 <td>                
-                  <button  class="btn btn-danger" (click)="deleteAdvertistmentPage(advertistmentPage.Id)">
+                  <button  class="btn btn-danger" *ngIf="_authenService.hasPermission('ADVERTISMENT','delete')" (click)="deleteAdvertistmentPage(advertistmentPage.Id)">
                     <i class="fa fa-trash"></i>
                   </button>
                 </td>
@@ -89,7 +89,7 @@
   <div class="col-lg-3 grid-margin stretch-card">
     <div class="card">
       <div class="form-group">
-        <button  class="btn btn-success btn-fw" (click)="showAddPosition()">Thêm mới </button>
+        <button  class="btn btn-success btn-fw" *ngIf="_authenService.hasPermission('ADVERTISMENT','create')" (click)="showAddPosition()">Thêm mới </button>
       </div>
       <div class="card-body">
         <div class="table-responsive" >
@@ -104,7 +104,7 @@
                 <td>{{advertistmentPosition.Id}}</td>
                 <td>{{advertistmentPosition.Name}}</td>               
                 <td>                
-                  <button  class="btn btn-danger" (click)="deleteAdvertistmentPosition(advertistmentPosition.Id)">
+                  <button  class="btn btn-danger" *ngIf="_authenService.hasPermission('ADVERTISMENT','delete')" (click)="deleteAdvertistmentPosition(advertistmentPosition.Id)">
                     <i class="fa fa-trash"></i>
                   </button>
                 </td>

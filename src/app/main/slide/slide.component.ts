@@ -6,7 +6,7 @@ import { NotificationService } from '../../core/service/notification.service';
 import { MessageConstant } from '../../core/common/message.constant';
 import { UploadService } from '../../core/service/upload.service';
 import { NgForm } from '@angular/forms';
-
+import {AuthenService} from '../../core/service/authen.service';
 @Component({
   selector: 'app-slide',
   templateUrl: './slide.component.html',
@@ -26,7 +26,7 @@ export class SlideComponent implements OnInit {
   public filter: any = '';
 
   constructor(private _dataService: DataService, private _notificationService: NotificationService,
-    private _uploadService: UploadService) { }
+    private _uploadService: UploadService,public _authenService:AuthenService) { }
 
   ngOnInit() {
     this.search();

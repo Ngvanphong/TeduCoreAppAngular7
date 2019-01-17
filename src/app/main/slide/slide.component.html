@@ -11,7 +11,7 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="form-group">
-        <button class="btn btn-success btn-fw" (click)="showAdd()">Thêm
+        <button class="btn btn-success btn-fw" *ngIf="_authenService.hasPermission('SLIDE','create')" (click)="showAdd()">Thêm
           mới</button>
       </div>
       <div class="card-body">
@@ -34,8 +34,8 @@
                   <img [src]="baseFolder+ item.Image" />
                 </td>
                 <td>
-                  <button class="btn btn-primary mr-2" (click)="editSlideModal(item.Id)"> <i class="fa fa-pencil-square-o"></i></button>
-                  <button  class="btn btn-danger" (click)="deleteSlide(item.Id)"> <i class="fa fa-trash"></i></button>
+                  <button class="btn btn-primary mr-2" *ngIf="_authenService.hasPermission('SLIDE','update')" (click)="editSlideModal(item.Id)"> <i class="fa fa-pencil-square-o"></i></button>
+                  <button  class="btn btn-danger" *ngIf="_authenService.hasPermission('SLIDE','delete')" (click)="deleteSlide(item.Id)"> <i class="fa fa-trash"></i></button>
                 </td>
               </tr>
             </tbody>

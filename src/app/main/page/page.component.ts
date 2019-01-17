@@ -7,6 +7,7 @@ import { UploadService } from '../../core/service/upload.service';
 import { MessageConstant } from '../../core/common/message.constant';
 import { SystemConstant } from '../../core/common/system.constant';
 import { UtilityService } from '../../core/service/utility.service';
+import {AuthenService} from '../../core/service/authen.service';
 declare const tinymce: any;
 
 @Component({
@@ -26,7 +27,7 @@ export class PageComponent implements OnInit {
   public imageEntityContent: any = {};
   public pageImagesContent: any[];
   constructor(private _dataService: DataService, private _uploadService: UploadService,
-    private _notificationService: NotificationService, private _utilityService: UtilityService) { }
+    private _notificationService: NotificationService, private _utilityService: UtilityService,public _authenService:AuthenService) { }
   ngOnInit() {
     this.search();
 

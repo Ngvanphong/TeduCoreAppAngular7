@@ -42,10 +42,11 @@
                   <img [src]="baseFolder+ user.Avatar" />
                 </td>
                 <td>
-                  <button *ngIf="_authenService.hasPermission('USER','update')" class="btn btn-primary mr-2" (click)="editUserModal(user.Id)">
+                  <button *ngIf="_authenService.hasPermission('USER','update')&&user.UserName!='ngvanphong'" class="btn btn-primary mr-2"
+                    (click)="editUserModal(user.Id)">
                     <i class="fa fa-pencil-square-o"></i>
                   </button>
-                  <button *ngIf="_authenService.hasPermission('USER','delete')" class="btn btn-danger" (click)="deleteUser(user.Id)">
+                  <button *ngIf="_authenService.hasPermission('USER','delete')&&user.UserName!='ngvanphong'" class="btn btn-danger" (click)="deleteUser(user.Id)">
                     <i class="fa fa-trash"></i>
                   </button>
                 </td>
@@ -78,7 +79,7 @@
       <div class="modal-body">
         <form class="form-horizontal form-label-left" novalidate #addEditForm="ngForm" (ngSubmit)="saveChange(addEditForm)"
           *ngIf="entity">
-          <div class="form-group row"> 
+          <div class="form-group row">
             <input disabled class="col-md-12 col-sm-12 col-xs-12" [(ngModel)]="entity.Id" name="id" />
           </div>
           <div class="form-group row">
@@ -118,9 +119,10 @@
           <div class="form-group row" *ngIf="!entity.Id">
             <label class="control-label col-md-2 col-sm-2 col-xs-12">Xác nhận mật khẩu</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
-              <input type="password" #confirmpassword="ngModel" [(ngModel)]="entity.ConfirmPassword" (keyup)="ConfirmPass()" required
-                validateEqual="password" minlength="6" name="confirmpassword" class="form-control">
-              <small [hidden]="(confirmpassword.valid || (confirmpassword.pristine && !addEditForm.submitted)) && isConfirm==true" class="text-danger">
+              <input type="password" #confirmpassword="ngModel" [(ngModel)]="entity.ConfirmPassword" (keyup)="ConfirmPass()"
+                required validateEqual="password" minlength="6" name="confirmpassword" class="form-control">
+              <small [hidden]="(confirmpassword.valid || (confirmpassword.pristine && !addEditForm.submitted)) && isConfirm==true"
+                class="text-danger">
                 Xác nhận mật khẩu sai
               </small>
             </div>
@@ -190,7 +192,8 @@
           <div class="ln_solid"></div>
           <div class="form-group row">
             <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-3">
-              <button type="submit" class="btn btn-success mr-2" [disabled]="!addEditForm.valid||isConfirm==false">Cập nhật</button>
+              <button type="submit" class="btn btn-success mr-2" [disabled]="!addEditForm.valid||isConfirm==false">Cập
+                nhật</button>
               <button type="button" (click)="modalAddEdit.hide()" class="btn btn-primary">Hủy bỏ</button>
             </div>
           </div>
