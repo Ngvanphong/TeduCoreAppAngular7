@@ -282,11 +282,10 @@ export class ProductComponent implements OnInit {
   }
 
 
-  public updateImageContent(imageId: any, caption: any, switchImage: any) {
+  public updateImageContent(imageId: any, switchImage: any) {
     for (let item of this.productImagesContent) {
       if (item.Id == imageId) {
-        this.imageContent = item;
-        this.imageContent.Caption = caption;
+        this.imageContent = item;      
         this.imageContent.SwitchImage = switchImage
       }
     }

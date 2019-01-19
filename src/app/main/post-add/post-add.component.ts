@@ -91,6 +91,7 @@ export class PostAddComponent implements OnInit {
   public deleteImage(imageId: string) {
     this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => {
       this._dataService.delete('/api/postImage/delete', 'id', imageId.toString()).subscribe((res) => {
+        this.imageEntity.BlogId=this.blogId;
         this.loadPostImage(this.imageEntity.BlogId);
       });
     })
@@ -119,9 +120,6 @@ export class PostAddComponent implements OnInit {
     })
   }
 
-  public updateImage(id:string,caption:string) {
-    this._dataService.put('/api/postimage/update?id='+id+'&'+'caption='+caption).subscribe((res) => { })
-  }
 
 
 }

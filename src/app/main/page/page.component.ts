@@ -117,6 +117,7 @@ export class PageComponent implements OnInit {
   public deleteImageContent(imageId: string) {
     this._notificationService.printConfirmationDialog(MessageConstant.CONFIRM_DELETE_MEG, () => {
       this._dataService.delete('/api/pageImage/delete', 'id', imageId.toString()).subscribe((res) => {
+        this.imageEntityContent.PageId=this.entity.Id;
         this.loadPostImage(this.imageEntityContent.PageId);
       });
     })

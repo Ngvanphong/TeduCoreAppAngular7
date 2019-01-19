@@ -378,8 +378,7 @@
           <thead>
             <tr>
               <th>Hình ảnh</th>
-              <th>Đường dẫn</th>
-              <th>Mô tả</th>         
+              <th>Đường dẫn</th>            
               <th>Tắt</th>
               <th></th>
             </tr>
@@ -391,11 +390,7 @@
               </td>             
               <td>
                 {{baseFolder+imageContent.Path}}
-              </td>
-              <td>
-                <input #captionContent="ngModel" class="form-control nolinebox" [(ngModel)]="imageContent.Caption" name="captionContent"
-                  type="text">
-              </td>
+              </td>           
               <td>
                 <label>
                   <input type="checkbox" [(ngModel)]="imageContent.SwitchImage" [name]="switchImage" name="status"
@@ -406,7 +401,7 @@
                 <button class="btn btn-danger mr-2" data-toggle="tooltip" data-placement="top" title="Xóa ảnh" (click)="deleteImageContent(imageContent.Id)">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
-                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật ảnh" (click)="updateImageContent(imageContent.Id,captionContent.value,imageContent.SwitchImage)">
+                <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cập nhật ảnh" (click)="updateImageContent(imageContent.Id,imageContent.SwitchImage)">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </button>
               </td>

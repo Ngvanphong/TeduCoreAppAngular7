@@ -70,10 +70,7 @@
             <tr>
               <th>
                 Hình ảnh
-              </th>
-              <th>
-                Mô tả
-              </th>
+              </th>            
               <th>
                 Đường dẫn
               </th>
@@ -84,23 +81,14 @@
             <tr *ngFor="let image of postImages">
               <td>
                 <img [src]="baseFolder + image.Path" width="100" />
-              </td>
-              <td>
-                <input #caption="ngModel" class="form-control nolinebox" [(ngModel)]="image.Caption" name="caption"
-                  type="text">
-              </td>
+              </td>           
               <td>
                 {{baseFolder+image.Path}}
               </td>
-              <td>
-                <button class="btn btn-primary mr-2" data-toggle="tooltip" data-placement="top" title="Cập nhật"
-                  (click)="updateImage(image.Id,image.Caption)">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                </button>
+              <td>               
                 <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa ảnh" (click)="deleteImage(image.Id)">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
-
               </td>
             </tr>
           </tbody>
