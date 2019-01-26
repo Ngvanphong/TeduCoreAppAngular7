@@ -17,11 +17,11 @@
     </select>
   </div>
   <div class="col-md-2 col-sm-6 col-xs-12 form-group ">
-    <input type="text" name="filter" [(ngModel)]="filterKeyword" (keyup.enter)="search()" class="form-control"
+    <input type="text" name="filter" [(ngModel)]="filterKeyword" (keyup.enter)="searchIndex()" class="form-control"
       placeholder="Tìm kiếm...">
   </div>
   <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-    <button class="btn btn-primary mr-2" type="button" (click)="search()">Tìm</button>
+    <button class="btn btn-primary mr-2" type="button" (click)="searchIndex()">Tìm</button>
     <button class="btn btn-default mr-2" type="button" (click)="reset()">Reset</button>
     <button class="btn btn-danger" type="button" (click)="deleteMulti()">Xóa</button>
   </div>

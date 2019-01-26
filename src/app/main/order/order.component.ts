@@ -44,6 +44,11 @@ export class OrderComponent implements OnInit {
     this.search();
   }
 
+  public searchIndex(){
+    this.pageIndex=1;
+    this.search();
+  }
+
   public reset() {
     this.filterCustomerName = '';
     this.filterEndDate = '';

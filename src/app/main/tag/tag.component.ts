@@ -34,6 +34,10 @@ export class TagComponent implements OnInit {
       this.totalRow = res.TotalRows;
     });
   }
+  public searchIndex(){
+    this.pageIndex=1;
+    this.search();
+  }
 
  
   deleteAllTagNotUse() {

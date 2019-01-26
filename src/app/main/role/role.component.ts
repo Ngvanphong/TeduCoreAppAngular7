@@ -36,6 +36,10 @@ export class RoleComponent implements OnInit {
         this.totalRow = res.TotalRows;
       })
   }
+  public searchIndex(){
+    this.pageIndex=1;
+    this.search();
+  }
 
   pageChanged(event: any): void {
     this.pageIndex = event.page;

@@ -73,6 +73,10 @@ export class PostComponent implements OnInit {
         }      
       });
   }
+  public searchIndex(){
+    this.pageIndex=1;
+    this.search();
+  }
 
   private deleteConfirm(id: string) {
     this._dataService.delete('/api/post/delete', 'id', id).subscribe((res: any) => {

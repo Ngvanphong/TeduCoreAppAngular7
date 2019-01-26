@@ -58,6 +58,10 @@ export class AdvertistmentComponent implements OnInit {
         this.totalRow = res.TotalRows;
       })
   }
+  public searchIndex(){
+    this.pageIndex=1;
+    this.search();
+  }
 
   public searchPage() {
     this._dataService.get('/api/advertistment/getpage')

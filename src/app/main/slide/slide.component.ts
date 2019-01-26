@@ -44,6 +44,10 @@ export class SlideComponent implements OnInit {
       this.totalRow = res.TotalRows;
     });
   }
+  public searchIndex(){
+    this.pageIndex=1;
+    this.search();
+  }
 
   public showAdd() {
     this.entity = { Status: true };

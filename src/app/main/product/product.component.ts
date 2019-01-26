@@ -83,6 +83,11 @@ export class ProductComponent implements OnInit {
       );
   }
 
+  public searchIndex(){
+    this.pageIndex=1;
+    this.search();
+  }
+
   public reset() {
     this.filterKeyword = '';
     this.filterHotPromotion = '';
