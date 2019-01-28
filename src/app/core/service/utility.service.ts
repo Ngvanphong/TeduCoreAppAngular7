@@ -31,7 +31,7 @@ export class UtilityService {
       let node = arr[i];
       node.children = [];
       map[node.Id] = i; // use map to look-up the parents
-      if (node.ParentId !== null) {
+      if (node.ParentId !== null&&node.ParentId !== node.Id) {
         arr[map[node.ParentId]].children.push(node);
       } else {
         roots.push(node);
