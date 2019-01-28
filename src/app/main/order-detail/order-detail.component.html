@@ -121,15 +121,12 @@
                   <td>{{item.Price | number}},000</td>
                   <td>{{item.Price * item.Quantity | number}},000</td>
                 </tr>
-                <tr>
-                  <td title="Admin thêm" colspan="8" *ngIf="entity.TotalMoneyOrder == undefined">
-                    Tổng tiền: {{totalAmount| number}},000 VND
-                  </td>
-                  <td title="Khách hàng đặt" colspan="8" *ngIf="entity.TotalMoneyOrder != undefined">
+                <tr>                 
+                  <td colspan="8">
                     Tổng tiền: {{entity.TotalMoneyOrder| number}},000 VND
                   </td>
                 </tr>
-                <tr *ngIf="entity.TotalMoneyPayment != undefined">
+                <tr>
                   <td colspan="8">
                     Tổng tiền cần thanh toán: {{entity.TotalMoneyPayment | number}},000 VND
                   </td>

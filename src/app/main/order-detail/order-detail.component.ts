@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../core/service/data.service';
 import {SystemConstant} from '../../core/common/system.constant';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import {ActivatedRoute, Params } from '@angular/router';
 import {UtilityService} from '../../core/service/utility.service';
 
 @Component({
@@ -12,7 +12,6 @@ import {UtilityService} from '../../core/service/utility.service';
 export class OrderDetailComponent implements OnInit {
   public orderDetails: any[];
   public entity: any;
-  public totalAmount: number;
   public orderId:any;
   public baseFolder:string=SystemConstant.BASE_API;
 
@@ -34,11 +33,7 @@ export class OrderDetailComponent implements OnInit {
 
   public loadOrderDetail(id: number) {
     this._dataService.get('/api/order/getalldetails/' + id.toString()).subscribe((response: any[]) => {
-      this.orderDetails = response;
-      this.totalAmount = 0;
-      for(var item of this.orderDetails){
-        this.totalAmount = this.totalAmount + (item.Quantity * item.Price);
-      }
+      this.orderDetails = response;     
     });
   }
 
