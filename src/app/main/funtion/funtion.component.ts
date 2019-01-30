@@ -21,7 +21,7 @@ export class FuntionComponent implements OnInit {
   public editFlag: boolean;
   public _permission: any[];
   public functionId: string;
-
+  private arryfuntion:any[]=[];
   constructor(private _dataService: DataService, private _utilityService: UtilityService, private _notificationService: NotificationService,
     public _authenService:AuthenService) { }
 
@@ -33,12 +33,14 @@ export class FuntionComponent implements OnInit {
     this._dataService.get('/api/function/getall?filter=' + this.filter)
       .subscribe((response: any[]) => {
         this._functions = response.filter(x => x.ParentId == null);
+        this.arryfuntion=response.filter(x => x.ParentId == null);
         this._functionHierachy = this._utilityService.Unflatten(response);
       });
   };
 
   public showAdd() {
     this.entity = { Status: true };
+    this._functions=this.arryfuntion;
     this.addEditModal.show();
     this.editFlag = false;
   }
@@ -48,11 +50,18 @@ export class FuntionComponent implements OnInit {
     this._dataService.get("/api/function/detail/" + id).subscribe((res: any) => {
       if (res != undefined) {
         this.entity = res;
+        this._functions=this.arrayRemove(this.arryfuntion,this.entity.Id);
         this.editFlag = true;
         this.addEditModal.show();
       }
     })
   };
+
+  private arrayRemove(arr, value) {
+    return arr.filter(function(ele){
+        return ele.Id != value;
+    });
+ }
 
   public showPermission(id: any) {
     this.functionId = id
