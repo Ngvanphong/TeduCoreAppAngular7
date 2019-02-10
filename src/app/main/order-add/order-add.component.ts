@@ -72,6 +72,7 @@ export class OrderAddComponent implements OnInit {
 
   public loadPrice($event) {
     this.detailEntity.Product = this.products.find(x => x.Id == this.detailEntity.ProductId);
+    this.detailEntity.OriginalPrice= this.detailEntity.Product.OriginalPrice;
     this.detailEntity.Price = this.detailEntity.Product.PromotionPrice ? this.detailEntity.Product.PromotionPrice : this.detailEntity.Product.Price
   }
 
@@ -80,6 +81,7 @@ export class OrderAddComponent implements OnInit {
       this.detailEntity.Product = this.products.find(x => x.Id == this.detailEntity.ProductId);
       this.detailEntity.Size = this.sizes.find(x => x.Id == this.detailEntity.SizeId);
       this.detailEntity.Color = this.colors.find(x => x.Id == this.detailEntity.ColorId);
+     
       let flag: boolean = true;
       for (var item of this.orderDetails) {
         if (item.ProductId == this.detailEntity.ProductId && item.SizeId == this.detailEntity.SizeId && item.ColorId == this.detailEntity.ColorId) {

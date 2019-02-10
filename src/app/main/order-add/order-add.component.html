@@ -109,6 +109,7 @@
                     <th>Màu sắc</th>
                     <th>Kích thước</th>
                     <th>Số lượng</th>
+                    <th>Giá gốc</th>
                     <th>Giá</th>
                     <th>Thành tiền</th>
                     <th></th>
@@ -120,6 +121,7 @@
                     <td>{{item.Color.Name}}</td>
                     <td>{{item.Size.Name}}</td>
                     <td>{{item.Quantity}}</td>
+                    <td>{{item.Product.OriginalPrice}}</td>
                     <td>{{item.Price}}</td>
                     <td>{{item.Price * item.Quantity}}</td>
                     <td>
@@ -203,7 +205,13 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="control-label col-md-2 col-sm-2 col-xs-12">Giá tiền</label>
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Giá gốc</label>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <input disabled type="number" #originalPrice="ngModel" [(ngModel)]="detailEntity.OriginalPrice" required name="originalPrice" class="form-control">             
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">Giá bán</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
               <input type="number" #price="ngModel" [(ngModel)]="detailEntity.Price" required name="price" class="form-control">
               <small [hidden]="price.valid || (price.pristine && !detailForm.submitted)" class="text-danger">
