@@ -16,9 +16,9 @@ export class DataService {
   constructor(private _http: HttpClient, private _notificationService: NotificationService, private _authenService: AuthenService
     , private _utilityService :UtilityService
     ) { }
-let
+
   get(uri: string) { 
-    let reqHeader = new HttpHeaders({ 
+    let reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this._authenService.getUserLogin().access_token
    });

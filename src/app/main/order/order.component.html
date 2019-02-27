@@ -10,7 +10,7 @@
     <input type="text" name="endDate" #dp="bsDatepicker" [ngModelOptions]="{standalone: true}" bsDatepicker [(ngModel)]="filterEndDate" class="form-control" placeholder="Đến ngày">
   </div>
   <div class="col-md-2 col-sm-2 col-xs-12 form-group ">
-    <input type="text"  name="customerName" [(ngModel)]="filterCustomerName" class="form-control" placeholder="Tên khách hàng">
+    <input type="text"  name="customerName" [(ngModel)]="filterCustomerName" class="form-control" placeholder="Tên khách hàng hay id">
   </div>
   <div class="col-md-2 col-sm-2 col-xs-12 form-group ">
     <select class="form-control" #billStatus="ngModel" name="billStatus" [(ngModel)]="filterbillStatus">

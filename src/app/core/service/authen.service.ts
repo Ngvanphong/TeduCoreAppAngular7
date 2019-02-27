@@ -8,7 +8,9 @@ import {UtilityService} from './utility.service'
 import {UrlConstant} from '../common/url.constant'
 
 const _httpOptionLogin = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+  headers: new HttpHeaders({
+     'Content-Type': 'application/x-www-form-urlencoded'
+ })
 };
 @Injectable({
   providedIn: 'root'
